@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+section {
+    overflow-y: scroll;
+}
+
+section::-webkit-scrollbar {
+    display: none;
+}
+
+.topbar {
+    top: 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #1e1e2fc8;
+}
+
+.topbar div {
+    justify-content: right;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 20px 0;
+    padding-right: 10%;
+}
+
+.topbar div a {
+    text-decoration: none;
+    color: blueviolet;
+    margin: 0 10px;
+    font-size: 24px;
+}
+
+.gamepad {
+    font-size: 48px !important;
+    padding-left: 5%;
+    color: blueviolet;
+}
+
+.home {
+    height: calc(100vh - 150px);
+    background: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url('https://picsum.photos/2000/800');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.home p {
+    font-size: 24px;
+    margin-left: 50px;
+    color: white;
+}
+
+.home .name {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 100px;
+    font-weight: 600;
+}
+
+.about {
+    background: #1e1e2f;
+}
+
+.title {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 0.5%;
+}
+
+.title span {
+    color: white;
+    font-size: 42px;
+}
+
+.about img {
+    width: 400px;
+    border-radius: 10%;
+}
+
+.about .container {
+    display: flex;
+    justify-content: center;
+    padding: 7% 0;
+}
+
+.about .details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-left: 40px;
+    width: 50%;
+}
+
+.about p {
+    font-size: 30px;
+    color: white;
+}
+
+.about p span {
+    color: darkorange;
+}
+
+.about #bio-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    outline: dashed 1px rgba(255, 255, 255, 0.215);
+}
+
+.about #bio-container #bio {
+    color: grey;
+    text-align: left;
+    font-size: 21px;
+    padding: 15px 15px;
+}
+
+/* tools */
+
+.tools-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 10% 0;
+}
+
+.tool {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+.tool-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 20%;
+    background-color: rgb(233, 202, 239);
+}
+
+.tool img {
+    width: 180px;
+    height: 180px;
+    border-radius: 10px;
+}
+
+.tool p {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.tool ul {
+    margin-top: 20px;
+    color: darkorange;
+    justify-content: center;
+}
+
+/* Projects */
+
+.projects {
+    background: #1e1e2f;
+    width: 100%;
+}
+
+.project-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-container .left {
+    flex-basis: 15%;
+}
+
+.project-container .right {
+    flex-basis: 15%;
+}
+
+.project-container .middle {
+    flex-basis: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-container .middle img{
+    /* flex-basis: 80%; */
+    /* display: flex; */
+}
