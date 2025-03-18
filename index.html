@@ -18,15 +18,17 @@
   </head>
 
   <body>
-    <nav class="topbar">
-      <span id="topname">Segun</span>
-      <div>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
+    <div class="topbar">
+      <div class="topbar-left">
+        <!-- <img src="images/profileimage.jpg" /> -->
+        <span>Shegzy</span>
       </div>
-    </nav>
+      <div class="topbar-right">
+        <a href="#home">Home</a>
+        <a href="#CV">Download CV</a>
+        <a href="#projects">Projects</a>
+      </div>
+    </div>
 
     <section>
       <!-- Me -->
@@ -39,23 +41,130 @@
           />
         </div>
         <div id="bio-container">
-          <p id="me">Hi it's me, <span id="name">Segun Olu-Abe</span></p>
-          <p id="title">
-            Game Developer &bull; Game Designer &bull; Game Artist
+          <p class="bio" id="me">
+            Hi, it's<span id="name"> Segun Olu-Abe</span>
           </p>
-          <p id="bio">
+
+          <p id="title">
+            &bull; Game Developer &bull; Game Designer &bull; Game Artist
+          </p>
+
+          <p class="bio" id="bio">
             Passionate game developer with 5+ years of experience in creating
             immersive gaming experiences.<br />
             Specialized in Unity and Unreal Engine development with a strong
             focus on gameplay mechanics and user experience.
           </p>
-          <div id="contact-buttons">
-            <div id="linkedin" class="contact-button"></div>
-            <div id="github" class="contact-button"></div>
-            <div id="ig" class="contact-button"></div>
+
+          <div class="bio" id="contact-buttons">
+            <div id="linkedin" class="contact-button">
+              <img src="images/linkedin-icon.png" alt="" />
+            </div>
+            <div id="github" class="contact-button">
+              <img src="images/github-icon.png" alt="" />
+            </div>
+            <div id="ig" class="contact-button">
+              <img src="images/instagram-icon.png" alt="" />
+            </div>
           </div>
-          <div id="hire">
+
+          <div class="bio" id="hire">
             <a href="mailto:segunoluabe@gmail.com">HIRE ME</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills -->
+      <div id="skills">
+        <p>What</p>
+        <div id="skills-container"></div>
+      </div>
+
+      <!-- Projects -->
+      <div class="projects" id="projects">
+        <div class="title">
+          <p>Executed Projects</p>
+        </div>
+
+        <div id="playable">
+          <p class="project-title">Playable Demos</p>
+          <div id="playable-demos-container">
+            <a href="public/sabi/index.html">
+              <p>Play Sabi Driver</p>
+            </a>
+            <a href="public/flappy/index.html"> Play Flappy Flap</a>
+          </div>
+        </div>
+
+        <div id="non-playable">
+          <p class="project-title">Video Demos</p>
+          <div id="video-demos-container">
+            <div class="video-block">
+              <p>Combat Prototype</p>
+              <iframe
+                src="https://www.youtube.com/embed/w38Hu2j1yjI?autoplay=1&mute=1"
+                title="Sekiro-Inspired Combat Prototype"
+                frameborder="0"
+                allow="encrypted-media; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-block">
+              <p>Infinite Runner</p>
+              <iframe
+                src="https://www.youtube.com/embed/L0IIiwwOxZk"
+                title="Infinite Runner Gameplay Test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-block">
+              <p>AI Driving Sim</p>
+              <iframe
+                src="https://www.youtube.com/embed/g5PShu04QIE"
+                title="F1 Driver Test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-block">
+              <p>Platformer Prototype</p>
+              <iframe
+                src="https://www.youtube.com/embed/n_TeVSVmlDg"
+                title="Platformer Game Development Test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-block">
+              <p>Helix Jump Clone</p>
+              <iframe
+                src="https://www.youtube.com/embed/lx4jHZ2LL7o"
+                title="BounceBall Gameplay"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-block">
+              <p>Combat Prototype</p>
+              <video
+                src="videos/combat.mp4"
+                controls
+                loop
+                muted
+                autoplay
+                class="gameplay"
+              ></video>
+            </div>
           </div>
         </div>
       </div>
@@ -63,7 +172,7 @@
       <!-- Tools -->
       <div class="tools">
         <div class="title">
-          <span>What Tools Do I Use?</span>
+          <span>Software Expertise</span>
         </div>
         <div class="tools-container">
           <div class="tool">
@@ -116,20 +225,6 @@
               <li>Level Design</li>
             </ul>
           </div>
-        </div>
-      </div>
-
-      <!-- Projects -->
-      <div class="projects" id="projects">
-        <div class="title">
-          <span>What Projects Have I Made?</span>
-        </div>
-        <div class="project-container">
-          <div class="left"></div>
-          <div class="middle">
-            <img src="images/unreal-engine.svg" alt="" />
-          </div>
-          <div class="right"></div>
         </div>
       </div>
     </section>
