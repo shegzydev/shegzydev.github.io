@@ -15,24 +15,29 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div class="topbar">
       <div class="topbar-left">
         <!-- <img src="images/profileimage.jpg" /> -->
-        <span>Shegzy</span>
+        <span><b>Shegzy</b></span>
       </div>
       <div class="topbar-right">
-        <a href="#home">Home</a>
-        <a href="#CV">Download CV</a>
+        <a download target="_blank" href="images/profileimage.jpg">
+          Download CV
+        </a>
         <a href="#projects">Projects</a>
       </div>
     </div>
 
-    <section>
+    <main>
       <!-- Me -->
-      <div class="home" id="home">
+      <section class="home" id="home">
         <div id="profileimage-container">
           <img
             src="images/profileimage.jpg"
@@ -42,11 +47,12 @@
         </div>
         <div id="bio-container">
           <p class="bio" id="me">
-            Hi, it's<span id="name"> Segun Olu-Abe</span>
+            Hi 👋<br />
+            it's<span id="name"> Segun Olu-Abe</span>
           </p>
 
           <p id="title">
-            &bull; Game Developer &bull; Game Designer &bull; Game Artist
+            <b>Game Developer &bull; Game Designer</b>
           </p>
 
           <p class="bio" id="bio">
@@ -57,33 +63,85 @@
           </p>
 
           <div class="bio" id="contact-buttons">
-            <div id="linkedin" class="contact-button">
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              id="linkedin"
+              class="contact-button"
+            >
               <img src="images/linkedin-icon.png" alt="" />
-            </div>
-            <div id="github" class="contact-button">
+            </a>
+            <a
+              href="https://www.github.com/shegzydev"
+              target="_blank"
+              id="github"
+              class="contact-button"
+            >
               <img src="images/github-icon.png" alt="" />
-            </div>
-            <div id="ig" class="contact-button">
+            </a>
+            <a id="ig" class="contact-button">
               <img src="images/instagram-icon.png" alt="" />
-            </div>
+            </a>
+            <a id="tiktok" class="contact-button">
+              <img src="images/tiktok-icon.png" alt="" />
+            </a>
           </div>
 
           <div class="bio" id="hire">
             <a href="mailto:segunoluabe@gmail.com">HIRE ME</a>
           </div>
         </div>
-      </div>
+      </section>
 
       <!-- Skills -->
-      <div id="skills">
-        <p>What</p>
-        <div id="skills-container"></div>
-      </div>
+      <section id="skills">
+        <div class="title">
+          <span>These are</span>
+          <p><b>My Skills</b></p>
+        </div>
+        <div id="skills-container">
+          <p style="color: whitesmoke; font-weight: 500">Programming</p>
+          <div id="skills-container-grid">
+            <label><img src="images/skills/DSA.jpg" /><br />DSA</label>
+            <label><img src="images/skills/oop.png" /><br />OOP</label>
+            <label><img src="images/skills/csharp.svg" /><br />C#</label>
+            <label><img src="images/skills/c++.svg" /><br />C++</label>
+            <label><img src="images/skills/pyth.svg" /><br />Python</label>
+            <!-- <label><img src="images/skills/html.svg" /><br />HTML</label> -->
+            <!-- <label><img src="images/skills/css.svg" /><br />CSS</label> -->
+            <label><img src="images/skills/JS.svg" /><br />JS</label>
+          </div>
+        </div>
+        <div id="skills-container">
+          <p style="color: whitesmoke; font-weight: 500">Software</p>
+          <div id="skills-container-grid">
+            <label
+              ><img
+                src="images/tools/unreal.svg"
+                style="filter: invert(100%)"
+              /><br />Unreal</label
+            >
+            <label
+              ><img
+                src="images/tools/unity.svg"
+                style="filter: invert(100%)"
+              /><br />Unity</label
+            >
+            <label><img src="images/tools/VS.svg" /><br />Visual Studio</label>
+            <label><img src="images/tools/VSCode.svg" /><br />VS Code</label>
+            <label><img src="images/tools/blender.svg" /><br />Blender</label>
+            <label
+              ><img src="images/tools/photoshop.svg" /><br />Photoshop</label
+            >
+          </div>
+        </div>
+      </section>
 
       <!-- Projects -->
-      <div class="projects" id="projects">
+      <section class="projects" id="projects">
         <div class="title">
-          <p>Executed Projects</p>
+          <span>I've worked on these</span>
+          <p><b>Game Projects</b></p>
         </div>
 
         <div id="playable">
@@ -91,14 +149,46 @@
           <div id="playable-demos-container">
             <a href="public/sabi/index.html">
               <p>Play Sabi Driver</p>
+              <img src="public/sabi/sabi-banner.png" alt="banner" />
+              <p>
+                Hit the streets of lagos in a top-down traffic simulation and
+                showcase your knowledge of traffic signs and rules.
+              </p>
             </a>
-            <a href="public/flappy/index.html"> Play Flappy Flap</a>
+
+            <a href="public/bera/index.html">
+              <p>Play Bera Rumble</p>
+              <img src="public/bera/bera-banner.png" alt="" />
+              <p>
+                Bera Rumble is a 2D side-scrolling game where you control a
+                character and navigate through a challenging obstacle course.
+              </p>
+            </a>
+
+            <a href="public/flappy/index.html">
+              <p>Play Flappy Flap</p>
+              <img src="public/flappy/flappy-banner.png" alt="" />
+              <p>
+                Flap your way through a challenging obstacle course and test
+                your reflexes.
+              </p>
+            </a>
           </div>
         </div>
 
         <div id="non-playable">
           <p class="project-title">Video Demos</p>
           <div id="video-demos-container">
+            <div class="video-block">
+              <p>Soccer Prototype</p>
+              <video
+                src="videos/Soccer_Small.mp4"
+                controls
+                muted
+                autoplay
+              ></video>
+            </div>
+
             <div class="video-block">
               <p>Combat Prototype</p>
               <iframe
@@ -110,28 +200,17 @@
                 allowfullscreen
               ></iframe>
             </div>
+
             <div class="video-block">
-              <p>Infinite Runner</p>
-              <iframe
-                src="https://www.youtube.com/embed/L0IIiwwOxZk"
-                title="Infinite Runner Gameplay Test"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+              <p>Clean n Breathe</p>
+              <video src="videos/CnB.mp4" controls muted></video>
             </div>
+
             <div class="video-block">
-              <p>AI Driving Sim</p>
-              <iframe
-                src="https://www.youtube.com/embed/g5PShu04QIE"
-                title="F1 Driver Test"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
+              <p>Els Where</p>
+              <video src="videos/Els_720.mov" controls muted></video>
             </div>
+
             <div class="video-block">
               <p>Platformer Prototype</p>
               <iframe
@@ -143,6 +222,36 @@
                 allowfullscreen
               ></iframe>
             </div>
+
+            <div class="video-block" id="towerdef">
+              <p>Tower Defense Prototype</p>
+              <video src="videos/Zero_Ruin.mp4" controls muted></video>
+            </div>
+
+            <div class="video-block">
+              <p>Infinite Runner</p>
+              <iframe
+                src="https://www.youtube.com/embed/L0IIiwwOxZk"
+                title="Infinite Runner Gameplay Test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+
+            <div class="video-block">
+              <p>AI Driving Sim</p>
+              <iframe
+                src="https://www.youtube.com/embed/g5PShu04QIE"
+                title="F1 Driver Test"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+
             <div class="video-block">
               <p>Helix Jump Clone</p>
               <iframe
@@ -154,79 +263,24 @@
                 allowfullscreen
               ></iframe>
             </div>
-            <div class="video-block">
-              <p>Combat Prototype</p>
-              <video
-                src="videos/combat.mp4"
-                controls
-                loop
-                muted
-                autoplay
-                class="gameplay"
-              ></video>
-            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Tools -->
-      <div class="tools">
-        <div class="title">
-          <span>Software Expertise</span>
+      <section id="bottom-bar">
+        <div id="button-array">
+          <a href="#home"><img src="images/Bottom/about.png" alt="" />Me</a>
+          <a href="#skills"
+            ><img src="images/Bottom/skills.png" alt="" />Skills</a
+          >
+          <a href="#projects"
+            ><img src="images/Bottom/portfolio.png" alt="" />Portfolio</a
+          >
+          <a href="#contact"
+            ><img src="images/Bottom/contact.png" alt="" />Contact</a
+          >
         </div>
-        <div class="tools-container">
-          <div class="tool">
-            <div class="tool-bg">
-              <img src="images/unity-technologies-logo.svg" alt="tool" />
-            </div>
-            <p>UNITY</p>
-            <ul>
-              <li>Game Design</li>
-              <li>Level Design</li>
-            </ul>
-          </div>
-          <div class="tool">
-            <div class="tool-bg">
-              <img src="images/unreal-engine.svg" alt="tool" />
-            </div>
-            <p>UNREAL ENGINE</p>
-            <ul>
-              <li>Game Design</li>
-              <li>Level Design</li>
-            </ul>
-          </div>
-          <div class="tool">
-            <div class="tool-bg">
-              <img src="images/logo-blender.svg" alt="tool" />
-            </div>
-            <p>BLENDER</p>
-            <ul>
-              <li>Game Design</li>
-              <li>Level Design</li>
-            </ul>
-          </div>
-          <div class="tool">
-            <div class="tool-bg">
-              <img src="images/visual-studio-code.svg" alt="tool" />
-            </div>
-            <p>VSCODE</p>
-            <ul>
-              <li>Game Design</li>
-              <li>Level Design</li>
-            </ul>
-          </div>
-          <div class="tool">
-            <div class="tool-bg">
-              <img src="images/visual-studio-2013.svg" alt="tool" />
-            </div>
-            <p>VISUAL CODE</p>
-            <ul>
-              <li>Game Design</li>
-              <li>Level Design</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </main>
   </body>
 </html>
