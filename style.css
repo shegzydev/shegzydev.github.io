@@ -56,15 +56,15 @@ section::-webkit-scrollbar {
 .topbar span {
   font-size: 16px;
   font-weight: 600px;
-  color: rgb(236, 84, 14);
+  color: #7575bd;
 }
 
 .topbar div a {
   text-decoration: none;
-  color: rgb(236, 84, 14);
+  color: #7575bd;
   margin-left: 20px;
   font-size: 16px;
-  border: rgb(236, 84, 14) solid 1px;
+  border: #7575bd solid 1px;
   padding: 0 5px;
   border-radius: 10px;
   transition: 0.5s;
@@ -73,7 +73,7 @@ section::-webkit-scrollbar {
 .topbar div a:hover {
   font-weight: 600;
   color: black;
-  background: rgb(236, 84, 14);
+  background: #7575bd;
 }
 
 .gamepad {
@@ -140,7 +140,7 @@ section::-webkit-scrollbar {
 .home #bio-container #contact-buttons .contact-button {
   width: 50px;
   height: 50px;
-  border: rgb(236, 84, 14) solid 1px;
+  border: #7575bd solid 1px;
   margin-right: 30px;
   border-radius: 50%;
   display: flex;
@@ -157,7 +157,7 @@ section::-webkit-scrollbar {
 .home #bio-container #hire {
   height: 45px;
   width: 130px;
-  border: rgb(236, 84, 14) solid 1px;
+  border: #7575bd solid 1px;
   border-radius: 20px;
   align-content: center;
   text-align: center;
@@ -168,7 +168,7 @@ section::-webkit-scrollbar {
   text-decoration: none;
   font-size: 22px;
   font-weight: 500;
-  color: rgb(236, 84, 14);
+  color: #a7a7f3;
 }
 
 .about {
@@ -225,8 +225,9 @@ section::-webkit-scrollbar {
   margin: 10px auto;
   padding: 10px;
   width: 50%;
-  border-radius: 10px;
-  border: rgb(236, 84, 14) solid 1px;
+  border-radius: 15px;
+  /* border: rgb(236, 84, 14) solid 1px; */
+  background: #0d0d14;
 }
 
 #skills #skills-container #skills-container-grid {
@@ -265,12 +266,12 @@ section::-webkit-scrollbar {
   border-radius: 20px;
 }
 
-.projects .title {
+.title {
   color: whitesmoke;
   font-size: xx-large;
 }
 
-.projects .title span {
+.title span {
   color: whitesmoke;
   font-size: small;
 }
@@ -281,26 +282,34 @@ section::-webkit-scrollbar {
 }
 
 .projects #non-playable {
-  padding: 20px 0;
+  padding-top: 30px;
 }
 
 .projects #non-playable #video-demos-container {
   display: grid;
-  grid-template-columns: 500px 500px 500px;
-  row-gap: 40px;
+  grid-template-columns: 30% 30% 30%;
+  row-gap: 30px;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  /* border: rgb(236, 84, 14) solid 1px; */
+  margin: 0 90px;
+  border-radius: 25px;
 }
 
 .projects #non-playable #video-demos-container .video-block {
-  border: rgb(236, 84, 14) solid 1px;
-  border-radius: 10px;
-  padding: 6px;
+  /* border: rgba(236, 84, 14, 0.418) solid 1px; */
+  border-radius: 15px;
+  background: #0d0d14;
+  padding: 0 5px;
+  padding-bottom: 15px;
 }
 
 .projects #non-playable #video-demos-container .video-block p {
   color: whitesmoke;
   margin: 5px 0;
+}
+
+.projects #non-playable #video-demos-container .video-block div {
 }
 
 .projects #non-playable #video-demos-container .video-block iframe {
@@ -312,26 +321,31 @@ section::-webkit-scrollbar {
 .projects #non-playable #video-demos-container .video-block video {
   width: 90%;
   aspect-ratio: 1 / 0.5625;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 .projects #playable {
-  padding: 20px 0;
+  padding: 30px 0;
 }
 
 .projects #playable #playable-demos-container {
   display: grid;
-  grid-template-columns: 500px 500px 500px;
+  grid-template-columns: 30% 30% 30%;
   row-gap: 30px;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  /* border: rgb(236, 84, 14) solid 1px; */
+  /* padding: 40px 0; */
+  margin: 0 90px;
+  border-radius: 25px;
 }
 
 .projects #playable #playable-demos-container a {
   text-decoration: none;
-  border: rgb(236, 84, 14) solid 1px;
-  border-radius: 10px;
+  /* border: rgb(236, 84, 14) solid 1px; */
+  border-radius: 15px;
   padding: 6px;
+  background: #0d0d14;
 }
 
 .projects #playable #playable-demos-container a img {
@@ -347,6 +361,8 @@ section::-webkit-scrollbar {
 @media (max-width: 900px) {
   .projects #non-playable #video-demos-container {
     grid-template-columns: 100%;
+    padding: unset;
+    margin: unset;
   }
   .projects #non-playable #video-demos-container .video-block {
     margin: 0 10px;
@@ -354,11 +370,22 @@ section::-webkit-scrollbar {
 
   .projects #playable #playable-demos-container {
     grid-template-columns: 100%;
+    padding: unset;
+    margin: unset;
   }
 
   .projects #playable #playable-demos-container a {
     margin: 0 10px;
   }
+}
+
+/* Contact */
+#contact {
+  margin: 10px 0;
+  padding: 20px 0;
+  background: #1e1e2f;
+  text-align: center;
+  border-radius: 20px;
 }
 
 /* Bottom Bar */
@@ -395,11 +422,17 @@ section::-webkit-scrollbar {
 
 #bottom-bar #button-array a img {
   width: 32px;
+  height: 32px;
   filter: invert(100%);
 }
 
 @media (max-width: 900px) {
   #bottom-bar #button-array {
     width: 300px;
+  }
+  #bottom-bar #button-array a img {
+    width: 24px;
+    height: 24px;
+    filter: invert(100%);
   }
 }
