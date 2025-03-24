@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=0"
+    />
 
     <meta http-equiv="cache-control" content="no-cache" />
     <meta http-equiv="pragma" content="no-cache" />
@@ -28,7 +31,7 @@
         <span><b>Shegzy</b></span>
       </div>
       <div class="topbar-right">
-        <a download target="_blank" href="Resume/SEGUN_OLUABE_CV2.pdf">
+        <a download target="_blank" href="Resume/SEGUN AYOMIDE.pdf">
           Download CV
         </a>
         <a href="#projects">Projects</a>
@@ -181,6 +184,15 @@
               </p>
             </a>
 
+            <a href="public/memory/index.html">
+              <p>Play Memory Game</p>
+              <img src="public/memory/memorybanner.gif" alt="" />
+              <p>
+                Let's test your memory by seeing how many flipped cards you can
+                identify under time pressure 😎
+              </p>
+            </a>
+
             <a href="public/flappy/index.html">
               <p>Play Flappy Flap</p>
               <img src="public/flappy/flappy-banner.png" alt="" />
@@ -317,14 +329,20 @@
           <p><b>Hit me up!</b></p>
         </div>
         <div id="contact-block">
-          <a href=""><img src="images/whatsapp.svg" alt="" />WhatsApp</a>
-          <a href=""><img src="images/mail.png" alt="" />Email</a>
+          <a
+            href="https://wa.me/+2348145629787?text=Hello Segun%0AHope this meets you well,"
+            ><img src="images/whatsapp.svg" alt="" />WhatsApp</a
+          >
+          <a
+            href="mailto:oluabesegun@gmail.com?subject=subject&body=Hope this meets you well,"
+            ><img src="images/mail.png" alt="" />Email</a
+          >
           <a href=""><img src="images/discord.png" alt="" />Discord</a>
         </div>
         <p style="color: whitesmoke; margin: 20px 0">
           or tell me about your project
         </p>
-        <form action="submit">
+        <form id="chat" action="submit">
           <fieldset
             style="
               display: flex;
@@ -341,16 +359,16 @@
             <input
               type="text"
               name="name"
-              id=""
+              id="name-input"
               value=""
               placeholder="John Doe"
               required
             />
-            <label for="name">e-Mail</label>
+            <label for="name">eMail</label>
             <input
               type="email"
               name="mail"
-              id=""
+              id="email-input"
               value=""
               placeholder="johndoe@gmail.com"
               required
@@ -358,7 +376,7 @@
             <label for="name">Project Details</label>
             <textarea
               name="details"
-              id=""
+              id="details-input"
               rows="10"
               placeholder="Project details"
               required
@@ -377,6 +395,34 @@
             value="Send Message"
           />
         </form>
+        <script>
+          // JavaScript to handle form submission
+          document
+            .getElementById('chat')
+            .addEventListener('submit', function (event) {
+              event.preventDefault(); // Prevent the form from submitting traditionally
+
+              // Get the values from the form inputs
+              const name = document.getElementById('name-input').value;
+              const email = document.getElementById('email-input').value;
+              const detail = document.getElementById('details-input').value;
+
+              // Construct the WhatsApp message
+              const whatsappMessage =
+                `Email: ${email}%0A` +
+                `Name: ${name}%0A` + // %0A is used for newline in URL encoding
+                `Message: ${detail}`;
+
+              // Replace '1234567890' with your actual WhatsApp number (including country code)
+              const whatsappNumber = '+2348145629787';
+
+              // Create the WhatsApp URL
+              const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
+              // Open WhatsApp in a new tab or window
+              window.open(whatsappURL, '_blank');
+            });
+        </script>
       </section>
 
       <section id="footer">
