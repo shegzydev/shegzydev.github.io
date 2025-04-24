@@ -114,7 +114,11 @@ section::-webkit-scrollbar {
 }
 
 .home #bio-container .bio {
-  margin: 20px 0;
+  margin: 20px 20px;
+}
+
+.home #bio-container #bio {
+  text-align: justify;
 }
 
 .home #bio-container #me {
@@ -129,6 +133,7 @@ section::-webkit-scrollbar {
 .home #bio-container #title {
   font-size: 16px;
   font-weight: 500;
+  margin: 0 20px;
 }
 
 .home #bio-container #contact-buttons {
@@ -357,6 +362,11 @@ section::-webkit-scrollbar {
 .projects #playable #playable-demos-container a p {
   color: whitesmoke;
   margin: 5px 0;
+  padding: 0 10px;
+}
+
+.projects #playable #playable-demos-container a .banner-details {
+  text-align: justify;
 }
 
 @media (max-width: 900px) {
