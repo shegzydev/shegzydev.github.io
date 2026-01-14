@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banking Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="dashboard">
+      <!-- Sidebar -->
+      <div class="sidebar" id="sidebar">
+        <div class="logo">
+          <img class="logo-svg" src="images/bank.svg" alt="" />
+          BankFlow
+        </div>
+        <nav class="nav-menu">
+          <div class="nav-item active" data-page="home">
+            <span class="nav-icon">
+              <img class="nav-icon-svg" src="images/house.svg" alt="" />
+            </span>
+            <span>Home</span>
+          </div>
+          <div class="nav-item" data-page="transactions">
+            <span class="nav-icon">
+              <img class="nav-icon-svg" src="images/transaction.svg" alt="" />
+            </span>
+            <span>Transactions</span>
+          </div>
+          <div class="nav-item" data-page="analytics">
+            <span class="nav-icon">
+              <img class="nav-icon-svg" src="images/chart.svg" alt="" />
+            </span>
+            <span>Analytics</span>
+          </div>
+          <div class="nav-item" data-page="profile">
+            <span class="nav-icon">
+              <img class="nav-icon-svg" src="images/user.svg" alt="" />
+            </span>
+            <span>Profile</span>
+          </div>
+        </nav>
+      </div>
+
+      <div class="overlay" id="overlay"></div>
+
+      <!-- Main Content -->
+      <div class="main-content" id="mainContent">
+        <!-- Topbar -->
+        <div class="topbar">
+          <div style="display: flex; align-items: center; gap: 15px">
+            <button class="menu-toggle" id="menuToggle">☰</button>
+            <div class="topbar-title" id="pageTitle">Home</div>
+          </div>
+          <div class="user-profile">
+            <div class="user-name">Segun Olu-Abe</div>
+            <div class="user-avatar">SO</div>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+          <!-- Home Page -->
+          <div class="page active" id="homePage">
+            <div class="balance-card">
+              <div class="balance-label">Total Balance</div>
+              <div class="balance-amount" id="homeBalance">₦0.00</div>
+              <div class="balance-info">
+                <div class="balance-info-item">
+                  <span class="balance-info-label">Income</span>
+                  <span class="balance-info-value" id="homeIncome">₦0.00</span>
+                </div>
+                <div class="balance-info-item">
+                  <span class="balance-info-label">Expenses</span>
+                  <span class="balance-info-value" id="homeExpense">₦0.00</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="section-header">Recent Transactions</div>
+            <div class="transactions-preview" id="recentTransactions"></div>
+            <button
+              class="view-all-btn"
+              onclick="navigateToPage('transactions')"
+            >
+              View All Transactions →
+            </button>
+
+            <div class="analytics-summary">
+              <div class="section-header">Analytics Summary</div>
+              <div class="summary-grid">
+                <div class="summary-card green">
+                  <div class="balance-label">Total Income</div>
+                  <div class="summary-stat" id="summaryIncome">₦0.00</div>
+                  <div class="summary-description">All income transactions</div>
+                </div>
+                <div class="summary-card red">
+                  <div class="balance-label">Total Expenses</div>
+                  <div class="summary-stat" id="summaryExpense">₦0.00</div>
+                  <div class="summary-description">
+                    All expense transactions
+                  </div>
+                </div>
+                <div class="summary-card purple">
+                  <div class="balance-label">Most Spent On</div>
+                  <div class="summary-stat" id="topCategory">-</div>
+                  <div class="summary-description" id="topCategoryAmount">
+                    ₦0.00 spent
+                  </div>
+                </div>
+                <div class="summary-card">
+                  <div class="balance-label">Transaction Count</div>
+                  <div class="summary-stat" id="transactionCount">0</div>
+                  <div class="summary-description">Total transactions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Transactions Page -->
+          <div class="page" id="transactionsPage">
+            <div class="filters-bar">
+              <div class="filters">
+                <div class="filter-group">
+                  <label>Start Date</label>
+                  <input type="date" id="startDate" />
+                </div>
+                <div class="filter-group">
+                  <label>End Date</label>
+                  <input type="date" id="endDate" />
+                </div>
+                <div class="filter-group">
+                  <label>Type</label>
+                  <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="income">Income</option>
+                    <option value="expense">Expense</option>
+                  </select>
+                </div>
+                <div class="filter-group">
+                  <label>Category</label>
+                  <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="transactions-table-container desktop-view">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="transactionsBody"></tbody>
+              </table>
+            </div>
+
+            <div class="mobile-transactions" id="mobileTransactions"></div>
+          </div>
+
+          <!-- Analytics Page -->
+          <div class="page" id="analyticsPage">
+            <div class="charts-grid">
+              <div class="chart-card">
+                <div class="chart-title">Income vs Expense</div>
+                <canvas id="incomeExpenseChart"></canvas>
+              </div>
+              <div class="chart-card">
+                <div class="chart-title">Expense Distribution</div>
+                <canvas id="distributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Profile Page -->
+          <div class="page" id="profilePage">
+            <div class="profile-section">
+              <div class="profile-header">
+                <div class="profile-avatar">SO</div>
+                <div>
+                  <div class="profile-name">Segun Olu-Abe</div>
+                  <div class="profile-email">segun.oluabe@email.com</div>
+                </div>
+              </div>
+              <div class="info-grid">
+                <div class="info-item">
+                  <span class="info-label">Account Number</span>
+                  <span class="info-value">****5678</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Account Type</span>
+                  <span class="info-value">Savings Account</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Member Since</span>
+                  <span class="info-value">January 2020</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Phone Number</span>
+                  <span class="info-value">+234 803 456 7890</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Address</span>
+                  <span class="info-value">Lekki Phase 1, Lagos, Nigeria</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Nationality</span>
+                  <span class="info-value">Nigeria</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Status</span>
+                  <span class="info-value" style="color: #16a34a"
+                    >✓ Active</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
