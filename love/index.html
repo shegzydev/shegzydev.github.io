@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Year with Sophie ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #C9404A;
+    --rose-light: #F7D6D9;
+    --rose-deep: #8B1A24;
+    --cream: #FDF6EE;
+    --gold: #C8963E;
+    --text: #2C1A1D;
+    --muted: #8C6B6F;
+  }
+
+  html, body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Jost', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  #petals {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    top: -60px;
+    width: 12px;
+    height: 16px;
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    animation: fall linear infinite;
+  }
+
+  @keyframes fall {
+    0%   { transform: translateY(0) rotate(0deg) scale(1);   opacity: 0; }
+    5%   { opacity: 0.7; }
+    90%  { opacity: 0.5; }
+    100% { transform: translateY(110vh) rotate(540deg) scale(0.6); opacity: 0; }
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 0 2rem;
+  }
+
+  .date-pill {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rose);
+    border: 0.5px solid var(--rose-light);
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 2.5rem;
+    background: rgba(249,214,217,0.3);
+  }
+
+  .hero-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(100px, 30vw, 160px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 0.85;
+    color: var(--rose-light);
+    letter-spacing: -0.02em;
+    display: block;
+    position: relative;
+    user-select: none;
+  }
+
+  .hero-number::after {
+    content: '1';
+    position: absolute;
+    inset: 0;
+    color: var(--rose);
+    clip-path: inset(0 0 35% 0);
+  }
+
+  .hero-year-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 7vw, 38px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    letter-spacing: 0.04em;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 10vw, 52px);
+    font-weight: 400;
+    color: var(--rose-deep);
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .heart-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 2rem 0;
+  }
+
+  .heart-divider::before,
+  .heart-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--rose-light));
+  }
+  .heart-divider::after {
+    background: linear-gradient(to left, transparent, var(--rose-light));
+  }
+
+  .heart-icon {
+    color: var(--rose);
+    font-size: 18px;
+    animation: heartbeat 1.4s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    14%       { transform: scale(1.18); }
+    28%       { transform: scale(1); }
+    42%       { transform: scale(1.12); }
+    56%       { transform: scale(1); }
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 2rem 0;
+  }
+
+  .stat-card {
+    background: white;
+    border: 0.5px solid var(--rose-light);
+    border-radius: 16px;
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--rose);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 5px;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .memories {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 2.5rem 0;
+  }
+
+  .memory-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: white;
+    border: 0.5px solid #EDD8D9;
+    border-radius: 16px;
+    padding: 1.1rem 1.2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .memory-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .memory-emoji {
+    font-size: 22px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .memory-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text);
+  }
+
+  .memory-sub {
+    font-family: 'Jost', sans-serif;
+    font-style: normal;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 4px;
+    display: block;
+  }
+
+  .letter {
+    background: white;
+    border: 0.5px solid #EDD8D9;
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    margin: 2.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .letter::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px;
+    color: var(--rose-light);
+    position: absolute;
+    top: -30px;
+    left: 10px;
+    line-height: 1;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .letter-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.8;
+    color: var(--text);
+    position: relative;
+  }
+
+  .letter-sig {
+    margin-top: 1.5rem;
+    text-align: right;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--rose-deep);
+  }
+
+  .footer {
+    text-align: center;
+    padding: 2rem 0 0;
+  }
+
+  .footer-hearts {
+    font-size: 24px;
+    letter-spacing: 6px;
+    animation: pulse 2s ease-in-out infinite;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+  }
+
+  .footer-text {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<div id="petals"></div>
+
+<div class="page">
+
+  <div class="hero">
+    <div class="date-pill">April 15, 2025 — April 15, 2026</div>
+    <span class="hero-number">1</span>
+    <span class="hero-year-label">Year Together</span>
+    <div class="heart-divider"><span class="heart-icon">♥</span></div>
+    <div class="hero-name">Sophie ❤️</div>
+  </div>
+
+  <div class="stats reveal">
+    <div class="stat-card">
+      <span class="stat-num" id="stat-days">365</span>
+      <span class="stat-label">Days</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num" id="stat-hours">8,760</span>
+      <span class="stat-label">Hours</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Memories</span>
+    </div>
+  </div>
+
+  <div class="heart-divider reveal"><span class="heart-icon">♥</span></div>
+
+  <p class="section-title reveal">A year of beautiful moments</p>
+
+  <div class="memories">
+    <div class="memory-card">
+      <span class="memory-emoji">🌅</span>
+      <div>
+        <div class="memory-text">Every morning felt like the beginning of something wonderful</div>
+        <span class="memory-sub">Day one of many</span>
+      </div>
+    </div>
+    <div class="memory-card">
+      <span class="memory-emoji">😂</span>
+      <div>
+        <div class="memory-text">The inside jokes that only we understand</div>
+        <span class="memory-sub">Our own little language</span>
+      </div>
+    </div>
+    <div class="memory-card">
+      <span class="memory-emoji">🌙</span>
+      <div>
+        <div class="memory-text">Late nights, long conversations, never wanting it to end</div>
+        <span class="memory-sub">The best kind of sleepy</span>
+      </div>
+    </div>
+    <div class="memory-card">
+      <span class="memory-emoji">🌺</span>
+      <div>
+        <div class="memory-text">Adventures big and small, you make everything an experience</div>
+        <span class="memory-sub">Always better together</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="heart-divider reveal"><span class="heart-icon">♥</span></div>
+
+  <div class="letter reveal">
+    <p class="letter-text">
+      Sophie, a year ago something shifted — and everything got brighter. You've made the ordinary feel extraordinary and the hard days feel lighter. Every laugh, every quiet moment, every single day with you has been a gift.<br><br>
+      Here's to a year of us, and to every chapter still to come.
+    </p>
+    <div class="letter-sig">With all my love ❤️</div>
+  </div>
+
+  <div class="footer reveal">
+    <span class="footer-hearts">♥ ♥ ♥</span>
+    <p class="footer-text">One year down, forever to go</p>
+  </div>
+
+</div>
+
+<script>
+  const petalContainer = document.getElementById('petals');
+  const petalColors = ['#F7D6D9','#F0B8BC','#E89599','#C9404A','#F5E6E8'];
+  const count = 28;
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const size = 8 + Math.random() * 10;
+    p.style.cssText = `
+      left: ${Math.random() * 100}%;
+      width: ${size}px;
+      height: ${size * 1.3}px;
+      background: ${petalColors[Math.floor(Math.random() * petalColors.length)]};
+      animation-duration: ${5 + Math.random() * 7}s;
+      animation-delay: ${-Math.random() * 10}s;
+      border-radius: ${Math.random() > 0.5 ? '50% 0 50% 0' : '0 50% 0 50%'};
+      opacity: 0;
+    `;
+    petalContainer.appendChild(p);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.reveal, .memory-card').forEach(el => observer.observe(el));
+
+  const start = new Date('2025-04-15T00:00:00');
+  function updateStats() {
+    const now = new Date();
+    const diff = now - start;
+    const days = Math.floor(diff / 86400000);
+    const hrs  = Math.floor(diff / 3600000);
+    const d = document.getElementById('stat-days');
+    const h = document.getElementById('stat-hours');
+    if (d) d.textContent = days.toLocaleString();
+    if (h) h.textContent = hrs.toLocaleString();
+  }
+  updateStats();
+</script>
+</body>
+</html>
