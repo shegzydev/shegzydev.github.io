@@ -1,829 +1,1901 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>For Oluwatoyosi, My Queen</title>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --night:   #0d0810;
-  --velvet:  #1e0a1f;
-  --plum:    #2d0f2e;
-  --jewel:   #7a1a50;
-  --rose:    #c4717a;
-  --blush:   #f0b8c0;
-  --champ:   #f5deb3;
-  --cream:   #fceae6;
-  --ink:     rgba(252,234,230,0.88);
-  --ink2:    rgba(252,234,230,0.52);
-  --ink3:    rgba(252,234,230,0.22);
-  --serif:   'Cormorant Garamond', Georgia, serif;
-  --ui:      'Inter', system-ui, sans-serif;
-}
-html,body{width:100%;height:100%;overflow:hidden;background:var(--night);
-  font-family:var(--serif);color:var(--cream);-webkit-font-smoothing:antialiased;}
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <title>For Oluwatoyosi, My Queen</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      :root {
+        --night: #0d0810;
+        --velvet: #1e0a1f;
+        --plum: #2d0f2e;
+        --jewel: #7a1a50;
+        --rose: #c4717a;
+        --blush: #f0b8c0;
+        --champ: #f5deb3;
+        --cream: #fceae6;
+        --ink: rgba(252, 234, 230, 0.88);
+        --ink2: rgba(252, 234, 230, 0.52);
+        --ink3: rgba(252, 234, 230, 0.22);
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --ui: "Inter", system-ui, sans-serif;
+      }
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--night);
+        font-family: var(--serif);
+        color: var(--cream);
+        -webkit-font-smoothing: antialiased;
+      }
 
-/* ══ CANVAS BG ══ */
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+      /* ══ CANVAS BG ══ */
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
 
-/* ══ PAGES ══ */
-.page{
-  position:fixed;inset:0;z-index:10;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:2rem 1.6rem 5.5rem;
-  opacity:0;pointer-events:none;
-  overflow-y:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;
-}
-.page::-webkit-scrollbar{display:none;}
-.page.active{opacity:1;pointer-events:all;}
-.page.active .scene{animation:scene-in .9s cubic-bezier(.22,1,.36,1) both;}
-.page.exit .scene{animation:scene-out .6s cubic-bezier(.4,0,1,1) both;}
-@keyframes scene-in{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:none;}}
-@keyframes scene-out{from{opacity:1;transform:none;}to{opacity:0;transform:translateY(-20px);}}
-.scene{width:100%;max-width:380px;margin:0 auto;display:flex;flex-direction:column;align-items:center;}
+      /* ══ PAGES ══ */
+      .page {
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.6rem 5.5rem;
+        opacity: 0;
+        pointer-events: none;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .page::-webkit-scrollbar {
+        display: none;
+      }
+      .page.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .page.active .scene {
+        animation: scene-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+      .page.exit .scene {
+        animation: scene-out 0.6s cubic-bezier(0.4, 0, 1, 1) both;
+      }
+      @keyframes scene-in {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @keyframes scene-out {
+        from {
+          opacity: 1;
+          transform: none;
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+      .scene {
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-/* ══ ORNAMENTAL FRAME ══ */
-.frame-wrap{position:relative;width:100%;display:flex;justify-content:center;margin-bottom:.5rem;}
-.frame-wrap svg{width:280px;max-width:100%;}
-.frame-line{stroke-dasharray:600;stroke-dashoffset:600;animation:draw-line 1.8s ease forwards .3s;}
-@keyframes draw-line{to{stroke-dashoffset:0;}}
+      /* ══ ORNAMENTAL FRAME ══ */
+      .frame-wrap {
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0.5rem;
+      }
+      .frame-wrap svg {
+        width: 280px;
+        max-width: 100%;
+      }
+      .frame-line {
+        stroke-dasharray: 600;
+        stroke-dashoffset: 600;
+        animation: draw-line 1.8s ease forwards 0.3s;
+      }
+      @keyframes draw-line {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
 
-/* ══ TYPE ══ */
-.eyebrow{font-family:var(--ui);font-size:.58rem;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--rose);margin-bottom:.7rem;}
-.display-name{font-size:clamp(3rem,12vw,5.5rem);font-weight:600;font-style:italic;
-  line-height:.95;color:var(--cream);letter-spacing:.01em;text-align:center;}
-.display-name span{display:block;font-weight:300;font-style:normal;
-  font-size:.36em;letter-spacing:.22em;text-transform:uppercase;color:var(--blush);
-  margin-top:.5em;}
-.pull-quote{font-size:clamp(1.25rem,4.8vw,1.75rem);font-style:italic;font-weight:300;
-  color:var(--blush);line-height:1.45;text-align:center;max-width:26ch;margin:.6rem auto;}
-.body-p{font-family:var(--ui);font-size:clamp(.85rem,2.9vw,.98rem);font-weight:300;
-  line-height:1.86;color:var(--ink2);text-align:left;}
-.body-p strong{color:var(--cream);font-weight:400;}
-.serif-em{font-family:var(--serif);font-style:italic;color:var(--blush);}
+      /* ══ TYPE ══ */
+      .eyebrow {
+        font-family: var(--ui);
+        font-size: 0.58rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--rose);
+        margin-bottom: 0.7rem;
+      }
+      .display-name {
+        font-size: clamp(3rem, 12vw, 5.5rem);
+        font-weight: 600;
+        font-style: italic;
+        line-height: 0.95;
+        color: var(--cream);
+        letter-spacing: 0.01em;
+        text-align: center;
+      }
+      .display-name span {
+        display: block;
+        font-weight: 300;
+        font-style: normal;
+        font-size: 0.36em;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--blush);
+        margin-top: 0.5em;
+      }
+      .pull-quote {
+        font-size: clamp(1.25rem, 4.8vw, 1.75rem);
+        font-style: italic;
+        font-weight: 300;
+        color: var(--blush);
+        line-height: 1.45;
+        text-align: center;
+        max-width: 26ch;
+        margin: 0.6rem auto;
+      }
+      .body-p {
+        font-family: var(--ui);
+        font-size: clamp(0.85rem, 2.9vw, 0.98rem);
+        font-weight: 300;
+        line-height: 1.86;
+        color: var(--ink2);
+        text-align: left;
+      }
+      .body-p strong {
+        color: var(--cream);
+        font-weight: 400;
+      }
+      .serif-em {
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--blush);
+      }
 
-/* drop cap */
-.drop-cap::first-letter{font-family:var(--serif);font-size:3.5em;font-style:italic;
-  font-weight:600;float:left;line-height:.78;margin-right:.08em;margin-top:.05em;
-  color:var(--rose);}
+      /* drop cap */
+      .drop-cap::first-letter {
+        font-family: var(--serif);
+        font-size: 3.5em;
+        font-style: italic;
+        font-weight: 600;
+        float: left;
+        line-height: 0.78;
+        margin-right: 0.08em;
+        margin-top: 0.05em;
+        color: var(--rose);
+      }
 
-/* ══ ORNAMENT DIVIDERS ══ */
-.orn{text-align:center;font-size:1.1rem;color:var(--rose);
-  letter-spacing:.4em;margin:1rem 0;opacity:.7;}
-.rule-fancy{display:flex;align-items:center;gap:.8rem;margin:1.2rem 0;width:100%;}
-.rule-fancy::before,.rule-fancy::after{content:'';flex:1;height:1px;
-  background:linear-gradient(to right,transparent,rgba(196,113,122,.4),transparent);}
-.rule-fancy span{font-size:.65rem;color:var(--rose);letter-spacing:.15em;white-space:nowrap;font-family:var(--ui);}
+      /* ══ ORNAMENT DIVIDERS ══ */
+      .orn {
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--rose);
+        letter-spacing: 0.4em;
+        margin: 1rem 0;
+        opacity: 0.7;
+      }
+      .rule-fancy {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        margin: 1.2rem 0;
+        width: 100%;
+      }
+      .rule-fancy::before,
+      .rule-fancy::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          to right,
+          transparent,
+          rgba(196, 113, 122, 0.4),
+          transparent
+        );
+      }
+      .rule-fancy span {
+        font-size: 0.65rem;
+        color: var(--rose);
+        letter-spacing: 0.15em;
+        white-space: nowrap;
+        font-family: var(--ui);
+      }
 
-/* ══ NAVIGATION BTN ══ */
-.btn{display:inline-flex;align-items:center;gap:.45rem;
-  padding:.7rem 1.8rem;border-radius:100px;
-  border:1px solid rgba(196,113,122,.4);
-  background:rgba(196,113,122,.06);
-  color:var(--blush);font-family:var(--ui);font-size:.6rem;
-  letter-spacing:.22em;text-transform:uppercase;cursor:pointer;
-  transition:background .25s,border-color .25s,color .25s;margin-top:1.4rem;}
-.btn:hover{background:rgba(196,113,122,.15);border-color:var(--rose);color:var(--cream);}
-.btn svg{width:13px;height:13px;flex-shrink:0;}
+      /* ══ NAVIGATION BTN ══ */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.7rem 1.8rem;
+        border-radius: 100px;
+        border: 1px solid rgba(196, 113, 122, 0.4);
+        background: rgba(196, 113, 122, 0.06);
+        color: var(--blush);
+        font-family: var(--ui);
+        font-size: 0.6rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition:
+          background 0.25s,
+          border-color 0.25s,
+          color 0.25s;
+        margin-top: 1.4rem;
+      }
+      .btn:hover {
+        background: rgba(196, 113, 122, 0.15);
+        border-color: var(--rose);
+        color: var(--cream);
+      }
+      .btn svg {
+        width: 13px;
+        height: 13px;
+        flex-shrink: 0;
+      }
 
-/* ══ PROGRESS ══ */
-#dots{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);
-  z-index:60;display:flex;gap:.4rem;align-items:center;}
-.d{width:5px;height:5px;border-radius:50%;background:var(--ink3);
-  transition:background .4s,transform .35s;}
-.d.on{background:var(--rose);transform:scale(1.4);}
+      /* ══ PROGRESS ══ */
+      #dots {
+        position: fixed;
+        bottom: 1.6rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 60;
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+      }
+      .d {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--ink3);
+        transition:
+          background 0.4s,
+          transform 0.35s;
+      }
+      .d.on {
+        background: var(--rose);
+        transform: scale(1.4);
+      }
 
-/* ══ AUDIO CARD ══ */
-.a-card{
-  border:1px solid rgba(196,113,122,.25);border-radius:18px;
-  padding:1.5rem 1.6rem;width:100%;max-width:310px;
-  background:linear-gradient(135deg,rgba(45,15,46,.6),rgba(122,26,80,.1));
-  text-align:center;position:relative;overflow:hidden;
-}
-.a-card::before{
-  content:'';position:absolute;inset:0;border-radius:18px;
-  background:radial-gradient(ellipse at top left,rgba(196,113,122,.12),transparent 70%);
-  pointer-events:none;
-}
-.a-label{font-family:var(--ui);font-size:.52rem;letter-spacing:.22em;
-  text-transform:uppercase;color:var(--rose);margin-bottom:.45rem;}
-.a-title{font-size:1.05rem;font-style:italic;color:var(--cream);
-  margin-bottom:1rem;line-height:1.4;}
-.play-btn{
-  width:60px;height:60px;border-radius:50%;
-  border:1.5px solid var(--rose);background:transparent;
-  color:var(--rose);display:inline-flex;align-items:center;justify-content:center;
-  cursor:pointer;position:relative;transition:background .2s,transform .15s;
-}
-.play-btn:hover{background:rgba(196,113,122,.12);transform:scale(1.06);}
-.play-btn:active{transform:scale(.96);}
-.play-btn.playing::after{
-  content:'';position:absolute;inset:-7px;border-radius:50%;
-  border:1px solid var(--rose);
-  animation:ring-pulse 1.5s ease-out infinite;pointer-events:none;
-}
-@keyframes ring-pulse{0%{opacity:.6;transform:scale(1);}100%{opacity:0;transform:scale(1.6);}}
-.play-btn svg.pi{display:block;}.play-btn svg.pau{display:none;}
-.play-btn.playing svg.pi{display:none;}.play-btn.playing svg.pau{display:block;}
-.a-sub{font-family:var(--ui);font-size:.75rem;font-style:italic;color:var(--ink3);margin-top:.7rem;}
-audio{display:none;}
+      /* ══ AUDIO CARD ══ */
+      .a-card {
+        border: 1px solid rgba(196, 113, 122, 0.25);
+        border-radius: 18px;
+        padding: 1.5rem 1.6rem;
+        width: 100%;
+        max-width: 310px;
+        background: linear-gradient(
+          135deg,
+          rgba(45, 15, 46, 0.6),
+          rgba(122, 26, 80, 0.1)
+        );
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .a-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 18px;
+        background: radial-gradient(
+          ellipse at top left,
+          rgba(196, 113, 122, 0.12),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .a-label {
+        font-family: var(--ui);
+        font-size: 0.52rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--rose);
+        margin-bottom: 0.45rem;
+      }
+      .a-title {
+        font-size: 1.05rem;
+        font-style: italic;
+        color: var(--cream);
+        margin-bottom: 1rem;
+        line-height: 1.4;
+      }
+      .play-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 1.5px solid var(--rose);
+        background: transparent;
+        color: var(--rose);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .play-btn:hover {
+        background: rgba(196, 113, 122, 0.12);
+        transform: scale(1.06);
+      }
+      .play-btn:active {
+        transform: scale(0.96);
+      }
+      .play-btn.playing::after {
+        content: "";
+        position: absolute;
+        inset: -7px;
+        border-radius: 50%;
+        border: 1px solid var(--rose);
+        animation: ring-pulse 1.5s ease-out infinite;
+        pointer-events: none;
+      }
+      @keyframes ring-pulse {
+        0% {
+          opacity: 0.6;
+          transform: scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(1.6);
+        }
+      }
+      .play-btn svg.pi {
+        display: block;
+      }
+      .play-btn svg.pau {
+        display: none;
+      }
+      .play-btn.playing svg.pi {
+        display: none;
+      }
+      .play-btn.playing svg.pau {
+        display: block;
+      }
+      .a-sub {
+        font-family: var(--ui);
+        font-size: 0.75rem;
+        font-style: italic;
+        color: var(--ink3);
+        margin-top: 0.7rem;
+      }
+      audio {
+        display: none;
+      }
 
-/* ══ VOUCHER ══ */
-.voucher{
-  border:1px dashed rgba(196,113,122,.5);border-radius:20px;
-  padding:1.6rem 1.5rem;width:100%;max-width:300px;
-  background:linear-gradient(145deg,rgba(45,15,46,.5),rgba(122,26,80,.08));
-  text-align:center;position:relative;overflow:hidden;
-}
-.voucher::after{
-  content:'✦';position:absolute;font-size:6rem;
-  color:rgba(196,113,122,.04);top:-1rem;right:-1rem;
-  pointer-events:none;font-family:var(--serif);
-}
-.v-label{font-family:var(--ui);font-size:.5rem;letter-spacing:.25em;
-  text-transform:uppercase;color:var(--rose);margin-bottom:.7rem;}
-.v-main{font-size:1.2rem;font-style:italic;color:var(--cream);
-  line-height:1.4;margin-bottom:.5rem;}
-.v-fine{font-family:var(--ui);font-size:.72rem;color:var(--ink2);
-  line-height:1.6;margin-bottom:1rem;}
-.v-claim{padding:.6rem 1.5rem;border:1px solid var(--rose);border-radius:100px;
-  background:transparent;color:var(--blush);font-family:var(--ui);font-size:.6rem;
-  letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:background .2s;}
-.v-claim:hover{background:rgba(196,113,122,.12);}
-#claimed-msg{display:none;margin-top:.7rem;font-size:.88rem;
-  font-style:italic;color:var(--blush);}
+      /* ══ VOUCHER ══ */
+      .voucher {
+        border: 1px dashed rgba(196, 113, 122, 0.5);
+        border-radius: 20px;
+        padding: 1.6rem 1.5rem;
+        width: 100%;
+        max-width: 300px;
+        background: linear-gradient(
+          145deg,
+          rgba(45, 15, 46, 0.5),
+          rgba(122, 26, 80, 0.08)
+        );
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .voucher::after {
+        content: "✦";
+        position: absolute;
+        font-size: 6rem;
+        color: rgba(196, 113, 122, 0.04);
+        top: -1rem;
+        right: -1rem;
+        pointer-events: none;
+        font-family: var(--serif);
+      }
+      .v-label {
+        font-family: var(--ui);
+        font-size: 0.5rem;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+        color: var(--rose);
+        margin-bottom: 0.7rem;
+      }
+      .v-main {
+        font-size: 1.2rem;
+        font-style: italic;
+        color: var(--cream);
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+      }
+      .v-fine {
+        font-family: var(--ui);
+        font-size: 0.72rem;
+        color: var(--ink2);
+        line-height: 1.6;
+        margin-bottom: 1rem;
+      }
+      .v-claim {
+        padding: 0.6rem 1.5rem;
+        border: 1px solid var(--rose);
+        border-radius: 100px;
+        background: transparent;
+        color: var(--blush);
+        font-family: var(--ui);
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .v-claim:hover {
+        background: rgba(196, 113, 122, 0.12);
+      }
+      #claimed-msg {
+        display: none;
+        margin-top: 0.7rem;
+        font-size: 0.88rem;
+        font-style: italic;
+        color: var(--blush);
+      }
 
-/* ══ FADE LINES ══ */
-.fl{opacity:0;transform:translateY(9px);
-  transition:opacity .65s ease,transform .65s ease;}
-.fl.s{opacity:1;transform:none;}
+      /* ══ FADE LINES ══ */
+      .fl {
+        opacity: 0;
+        transform: translateY(9px);
+        transition:
+          opacity 0.65s ease,
+          transform 0.65s ease;
+      }
+      .fl.s {
+        opacity: 1;
+        transform: none;
+      }
 
-/* ══ P1 SPECIFIC ══ */
-#p1 .breathe{
-  position:fixed;bottom:3.5rem;left:50%;transform:translateX(-50%);
-  font-family:var(--ui);font-size:.55rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--ink3);
-  animation:breathe 2.8s ease-in-out infinite;white-space:nowrap;
-}
-@keyframes breathe{0%,100%{opacity:.2;}50%{opacity:.65;}}
+      /* ══ P1 SPECIFIC ══ */
+      #p1 .breathe {
+        position: fixed;
+        bottom: 3.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-family: var(--ui);
+        font-size: 0.55rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--ink3);
+        animation: breathe 2.8s ease-in-out infinite;
+        white-space: nowrap;
+      }
+      @keyframes breathe {
+        0%,
+        100% {
+          opacity: 0.2;
+        }
+        50% {
+          opacity: 0.65;
+        }
+      }
 
-/* ══ LETTER PAGE ══ */
-#p2 .scene,#p4 .scene{align-items:flex-start;}
-#p2,#p4{justify-content:flex-start;padding-top:2.5rem;}
-.letter-inner{max-width:340px;width:100%;}
-.letter-inner p{margin-bottom:.9rem;}
-.open-quote{font-size:4rem;line-height:.5;color:var(--rose);
-  font-style:italic;opacity:.6;display:block;margin-bottom:-.5rem;}
+      /* ══ LETTER PAGE ══ */
+      #p2 .scene,
+      #p4 .scene {
+        align-items: flex-start;
+      }
+      #p2,
+      #p4 {
+        justify-content: flex-start;
+        padding-top: 2.5rem;
+      }
+      .letter-inner {
+        max-width: 340px;
+        width: 100%;
+      }
+      .letter-inner p {
+        margin-bottom: 0.9rem;
+      }
+      .open-quote {
+        font-size: 4rem;
+        line-height: 0.5;
+        color: var(--rose);
+        font-style: italic;
+        opacity: 0.6;
+        display: block;
+        margin-bottom: -0.5rem;
+      }
 
-/* ══ END PAGE ══ */
-.end-big{font-size:clamp(1.7rem,6.5vw,2.5rem);font-style:italic;
-  font-weight:300;line-height:1.3;text-align:center;max-width:24ch;color:var(--cream);}
-.end-sig{font-family:var(--ui);font-size:.78rem;letter-spacing:.12em;
-  color:var(--ink2);margin-top:1.2rem;}
-.replay-row{display:flex;gap:.9rem;justify-content:center;margin-top:1.8rem;}
-.r-btn{width:40px;height:40px;border-radius:50%;
-  border:1px solid var(--ink3);background:transparent;color:var(--ink2);
-  display:inline-flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:border-color .2s,color .2s;}
-.r-btn:hover{border-color:var(--rose);color:var(--rose);}
+      /* ══ END PAGE ══ */
+      .end-big {
+        font-size: clamp(1.7rem, 6.5vw, 2.5rem);
+        font-style: italic;
+        font-weight: 300;
+        line-height: 1.3;
+        text-align: center;
+        max-width: 24ch;
+        color: var(--cream);
+      }
+      .end-sig {
+        font-family: var(--ui);
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        color: var(--ink2);
+        margin-top: 1.2rem;
+      }
+      .replay-row {
+        display: flex;
+        gap: 0.9rem;
+        justify-content: center;
+        margin-top: 1.8rem;
+      }
+      .r-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--ink3);
+        background: transparent;
+        color: var(--ink2);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          color 0.2s;
+      }
+      .r-btn:hover {
+        border-color: var(--rose);
+        color: var(--rose);
+      }
 
-/* ══ FLOATING PETALS ══ */
-.petal{position:absolute;pointer-events:none;border-radius:50% 0 50% 0;
-  animation:petal-fall linear forwards;}
-@keyframes petal-fall{
-  0%{opacity:.7;transform:translateY(-10px) rotate(0deg) scale(1);}
-  100%{opacity:0;transform:translateY(130px) rotate(200deg) scale(.5);}
-}
-</style>
-</head>
-<body>
+      /* ══ FLOATING PETALS ══ */
+      .petal {
+        position: absolute;
+        pointer-events: none;
+        border-radius: 50% 0 50% 0;
+        animation: petal-fall linear forwards;
+      }
+      @keyframes petal-fall {
+        0% {
+          opacity: 0.7;
+          transform: translateY(-10px) rotate(0deg) scale(1);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(130px) rotate(200deg) scale(0.5);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="bg-canvas"></canvas>
+    <audio id="ambient-audio" loop preload="auto">
+      <source src="ambient.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audio1" preload="auto">
+      <source src="night-thoughts.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="audio2" preload="auto">
+      <source src="duet-rehearsal.mp3" type="audio/mpeg" />
+    </audio>
 
-<canvas id="bg-canvas"></canvas>
-<audio id="ambient-audio" loop preload="auto"><source src="ambient.mp3" type="audio/mpeg"></audio>
-<audio id="audio1" preload="auto"><source src="night-thoughts.mp3" type="audio/mpeg"></audio>
-<audio id="audio2" preload="auto"><source src="duet-rehearsal.mp3" type="audio/mpeg"></audio>
+    <div id="dots">
+      <div class="d on"></div>
+      <div class="d"></div>
+      <div class="d"></div>
+      <div class="d"></div>
+      <div class="d"></div>
+      <div class="d"></div>
+    </div>
 
-<div id="dots">
-  <div class="d on"></div><div class="d"></div><div class="d"></div>
-  <div class="d"></div><div class="d"></div><div class="d"></div>
-</div>
-
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P1 · ARRIVAL
 ═══════════════════════════════════ -->
-<section class="page active" id="p1">
-<div class="scene">
-  <!-- Ornamental arch frame -->
-  <div class="frame-wrap fl">
-    <svg viewBox="0 0 280 160" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- arch -->
-      <path class="frame-line" d="M40 155 C40 155 40 80 140 30 C240 80 240 155 240 155"
-        stroke="#c4717a" stroke-width=".8" stroke-linecap="round" fill="none"/>
-      <!-- left vine -->
-      <path class="frame-line" style="animation-delay:.6s"
-        d="M40 155 Q20 120 30 90 Q15 70 35 55"
-        stroke="rgba(196,113,122,.5)" stroke-width=".7" fill="none"/>
-      <!-- right vine -->
-      <path class="frame-line" style="animation-delay:.7s"
-        d="M240 155 Q260 120 250 90 Q265 70 245 55"
-        stroke="rgba(196,113,122,.5)" stroke-width=".7" fill="none"/>
-      <!-- left petals -->
-      <circle cx="28" cy="88" r="3" fill="none" stroke="rgba(196,113,122,.6)" stroke-width=".7"
-        style="stroke-dasharray:20;stroke-dashoffset:20;animation:draw-line 1s ease forwards 1.2s"/>
-      <circle cx="22" cy="72" r="2" fill="rgba(196,113,122,.3)"
-        style="opacity:0;animation:fade-in .5s ease forwards 1.4s"/>
-      <circle cx="252" cy="88" r="3" fill="none" stroke="rgba(196,113,122,.6)" stroke-width=".7"
-        style="stroke-dasharray:20;stroke-dashoffset:20;animation:draw-line 1s ease forwards 1.2s"/>
-      <circle cx="258" cy="72" r="2" fill="rgba(196,113,122,.3)"
-        style="opacity:0;animation:fade-in .5s ease forwards 1.4s"/>
-      <!-- top ornament -->
-      <g style="opacity:0;animation:fade-in .7s ease forwards 1.6s">
-        <circle cx="140" cy="26" r="4" fill="none" stroke="#c4717a" stroke-width=".8"/>
-        <circle cx="140" cy="26" r="1.5" fill="#c4717a"/>
-        <line x1="125" y1="26" x2="133" y2="26" stroke="rgba(196,113,122,.5)" stroke-width=".6"/>
-        <line x1="147" y1="26" x2="155" y2="26" stroke="rgba(196,113,122,.5)" stroke-width=".6"/>
-        <!-- tiny leaves -->
-        <path d="M118 26 Q114 20 120 18 Q118 24 118 26Z" fill="rgba(196,113,122,.4)"/>
-        <path d="M162 26 Q166 20 160 18 Q162 24 162 26Z" fill="rgba(196,113,122,.4)"/>
-      </g>
-      <!-- bottom flourish -->
-      <path class="frame-line" style="animation-delay:.9s"
-        d="M70 155 Q100 148 140 152 Q180 148 210 155"
-        stroke="rgba(196,113,122,.35)" stroke-width=".6" fill="none"/>
-      <circle cx="140" cy="152" r="2" fill="rgba(196,113,122,.4)"
-        style="opacity:0;animation:fade-in .4s ease forwards 1.8s"/>
-    </svg>
-  </div>
+    <section class="page active" id="p1">
+      <div class="scene">
+        <!-- Ornamental arch frame -->
+        <div class="frame-wrap fl">
+          <svg
+            viewBox="0 0 280 160"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- arch -->
+            <path
+              class="frame-line"
+              d="M40 155 C40 155 40 80 140 30 C240 80 240 155 240 155"
+              stroke="#c4717a"
+              stroke-width=".8"
+              stroke-linecap="round"
+              fill="none"
+            />
+            <!-- left vine -->
+            <path
+              class="frame-line"
+              style="animation-delay: 0.6s"
+              d="M40 155 Q20 120 30 90 Q15 70 35 55"
+              stroke="rgba(196,113,122,.5)"
+              stroke-width=".7"
+              fill="none"
+            />
+            <!-- right vine -->
+            <path
+              class="frame-line"
+              style="animation-delay: 0.7s"
+              d="M240 155 Q260 120 250 90 Q265 70 245 55"
+              stroke="rgba(196,113,122,.5)"
+              stroke-width=".7"
+              fill="none"
+            />
+            <!-- left petals -->
+            <circle
+              cx="28"
+              cy="88"
+              r="3"
+              fill="none"
+              stroke="rgba(196,113,122,.6)"
+              stroke-width=".7"
+              style="
+                stroke-dasharray: 20;
+                stroke-dashoffset: 20;
+                animation: draw-line 1s ease forwards 1.2s;
+              "
+            />
+            <circle
+              cx="22"
+              cy="72"
+              r="2"
+              fill="rgba(196,113,122,.3)"
+              style="opacity: 0; animation: fade-in 0.5s ease forwards 1.4s"
+            />
+            <circle
+              cx="252"
+              cy="88"
+              r="3"
+              fill="none"
+              stroke="rgba(196,113,122,.6)"
+              stroke-width=".7"
+              style="
+                stroke-dasharray: 20;
+                stroke-dashoffset: 20;
+                animation: draw-line 1s ease forwards 1.2s;
+              "
+            />
+            <circle
+              cx="258"
+              cy="72"
+              r="2"
+              fill="rgba(196,113,122,.3)"
+              style="opacity: 0; animation: fade-in 0.5s ease forwards 1.4s"
+            />
+            <!-- top ornament -->
+            <g style="opacity: 0; animation: fade-in 0.7s ease forwards 1.6s">
+              <circle
+                cx="140"
+                cy="26"
+                r="4"
+                fill="none"
+                stroke="#c4717a"
+                stroke-width=".8"
+              />
+              <circle cx="140" cy="26" r="1.5" fill="#c4717a" />
+              <line
+                x1="125"
+                y1="26"
+                x2="133"
+                y2="26"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".6"
+              />
+              <line
+                x1="147"
+                y1="26"
+                x2="155"
+                y2="26"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".6"
+              />
+              <!-- tiny leaves -->
+              <path
+                d="M118 26 Q114 20 120 18 Q118 24 118 26Z"
+                fill="rgba(196,113,122,.4)"
+              />
+              <path
+                d="M162 26 Q166 20 160 18 Q162 24 162 26Z"
+                fill="rgba(196,113,122,.4)"
+              />
+            </g>
+            <!-- bottom flourish -->
+            <path
+              class="frame-line"
+              style="animation-delay: 0.9s"
+              d="M70 155 Q100 148 140 152 Q180 148 210 155"
+              stroke="rgba(196,113,122,.35)"
+              stroke-width=".6"
+              fill="none"
+            />
+            <circle
+              cx="140"
+              cy="152"
+              r="2"
+              fill="rgba(196,113,122,.4)"
+              style="opacity: 0; animation: fade-in 0.4s ease forwards 1.8s"
+            />
+          </svg>
+        </div>
 
-  <div class="eyebrow fl" style="margin-top:-.5rem;">happy birthday</div>
-  <h1 class="display-name fl">
-    Oluwatoyosi
-    <span>My Queen · My Person</span>
-  </h1>
+        <div class="eyebrow fl" style="margin-top: -0.5rem">happy birthday</div>
+        <h1 class="display-name fl">
+          Oluwatoyosi
+          <span>My Queen · My Person</span>
+        </h1>
 
-  <div class="rule-fancy fl" style="margin:1.2rem 0;width:200px;">
-    <span>♡</span>
-  </div>
+        <div class="rule-fancy fl" style="margin: 1.2rem 0; width: 200px">
+          <span>♡</span>
+        </div>
 
-  <p class="pull-quote fl" style="font-size:1.05rem;color:var(--ink2);">
-    This is a tiny universe I built<br>just for you.
-  </p>
+        <p class="pull-quote fl" style="font-size: 1.05rem; color: var(--ink2)">
+          This is a tiny universe I built<br />just for you.
+        </p>
 
-  <button class="btn fl" onclick="goTo(1)">
-    Open your heart
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-</div>
-<span class="breathe">scroll to begin</span>
-</section>
+        <button class="btn fl" onclick="goTo(1)">
+          Open your heart
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <span class="breathe">scroll to begin</span>
+    </section>
 
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P2 · THE LETTER
 ═══════════════════════════════════ -->
-<section class="page" id="p2">
-<div class="scene">
-  <div class="letter-inner">
-    <div class="eyebrow fl" style="text-align:center;">a letter of firsts</div>
+    <section class="page" id="p2">
+      <div class="scene">
+        <div class="letter-inner">
+          <div class="eyebrow fl" style="text-align: center">
+            a letter of firsts
+          </div>
 
-    <!-- top flourish -->
-    <div class="fl" style="text-align:center;margin-bottom:1rem;">
-      <svg width="200" height="28" viewBox="0 0 200 28" fill="none">
-        <path d="M10 14 Q50 4 100 14 Q150 24 190 14"
-          stroke="rgba(196,113,122,.4)" stroke-width=".8" fill="none"
-          style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw-line 1.4s ease forwards .5s"/>
-        <circle cx="100" cy="14" r="3" fill="none" stroke="rgba(196,113,122,.5)" stroke-width=".8"
-          style="opacity:0;animation:fade-in .5s ease forwards 1.2s"/>
-        <circle cx="18" cy="11" r="2" fill="rgba(196,113,122,.35)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1.4s"/>
-        <circle cx="182" cy="11" r="2" fill="rgba(196,113,122,.35)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1.4s"/>
-      </svg>
-    </div>
+          <!-- top flourish -->
+          <div class="fl" style="text-align: center; margin-bottom: 1rem">
+            <svg width="200" height="28" viewBox="0 0 200 28" fill="none">
+              <path
+                d="M10 14 Q50 4 100 14 Q150 24 190 14"
+                stroke="rgba(196,113,122,.4)"
+                stroke-width=".8"
+                fill="none"
+                style="
+                  stroke-dasharray: 300;
+                  stroke-dashoffset: 300;
+                  animation: draw-line 1.4s ease forwards 0.5s;
+                "
+              />
+              <circle
+                cx="100"
+                cy="14"
+                r="3"
+                fill="none"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".8"
+                style="opacity: 0; animation: fade-in 0.5s ease forwards 1.2s"
+              />
+              <circle
+                cx="18"
+                cy="11"
+                r="2"
+                fill="rgba(196,113,122,.35)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1.4s"
+              />
+              <circle
+                cx="182"
+                cy="11"
+                r="2"
+                fill="rgba(196,113,122,.35)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1.4s"
+              />
+            </svg>
+          </div>
 
-    <p class="body-p drop-cap fl">
-      There are people who enter a room, and then there are people who <span class="serif-em">change</span> the room simply by being in it. You, Oluwatoyosi, are the second kind. I knew it before you even knew I was listening.
-    </p>
+          <p class="body-p drop-cap fl">
+            There are people who enter a room, and then there are people who
+            <span class="serif-em">change</span> the room simply by being in it.
+            You, Oluwatoyosi, are the second kind. I knew it before you even
+            knew I was listening.
+          </p>
 
-    <p class="body-p fl">
-      Your sister's shop. You didn't know I could hear you — but the universe, being the romantic that it is, made sure I did.
-    </p>
+          <p class="body-p fl">
+            At Follycrown Stitches. You didn't know I could hear you, but the
+            universe being the romantic that it is, made sure I did.
+          </p>
 
-    <div class="fl" style="margin:1rem 0;">
-      <span class="open-quote">"</span>
-      <p class="pull-quote" style="font-size:1.3rem;margin:0;text-align:left;padding-left:.5rem;">
-        He's so cute.
-      </p>
-    </div>
+          <div class="fl" style="margin: 1rem 0">
+            <span class="open-quote">"</span>
+            <p
+              class="pull-quote"
+              style="
+                font-size: 1.3rem;
+                margin: 0;
+                text-align: left;
+                padding-left: 0.5rem;
+              "
+            >
+              He's so cute.
+            </p>
+          </div>
 
-    <p class="body-p fl">
-      That was you — unguarded, completely yourself. And that is the most Oluwatoyosi thing about you: your realness announces itself before you even try.
-    </p>
+          <p class="body-p fl">
+            That was you, unguarded, completely yourself. And that is the most
+            Oluwatoyosi thing about you: your realness announces itself before
+            you even try.
+          </p>
 
-    <div class="orn fl">— ✦ —</div>
+          <div class="orn fl">— ✦ —</div>
 
-    <p class="body-p fl">
-      You carry yourself with an elegance that doesn't ask for a room's attention — it simply receives it. A quiet regality. You say <span class="serif-em">"I'm a Queen"</span> and the thing is, you don't have to. It's already obvious in how you move, how you hold yourself, how the air around you shifts.
-    </p>
+          <p class="body-p fl">
+            You carry yourself with an elegance that doesn't ask for a room's
+            attention. It simply receives it. A quiet regality. You say
+            <span class="serif-em">"I'm a Queen"</span> and the thing is, you
+            don't have to. It's already obvious in how you move, how you hold
+            yourself, how the air around you shifts.
+          </p>
 
-    <p class="body-p fl" style="margin-top:.7rem;">
-      But then — and this is the part the world doesn't immediately see — you laugh. And everything changes. I genuinely do not have words for your laugh except to say that it is <strong>contagious in the most dangerous way.</strong> The kind of laugh that makes you forget what you were even worried about. Since I met you, I have smiled more than I have in years. That is not a small thing. That is <span class="serif-em">you.</span>
-    </p>
+          <p class="body-p fl" style="margin-top: 0.7rem">
+            You laugh and everything changes. I genuinely do not have words for
+            your laugh except to say that it is
+            <strong>contagious in the most dangerous way.</strong> The kind of
+            laugh that makes you forget what you were even worried about. Since
+            I met you, I have smiled more than I have in years. That is not a
+            small thing. That is <span class="serif-em">you.</span>
+          </p>
 
-    <div class="orn fl">— ✦ —</div>
+          <div class="orn fl">— ✦ —</div>
 
-    <p class="body-p fl">
-      You act tough. And you are — genuinely. But toughness is not your whole story. It is the cover of a book whose pages are warm and soft and full. Beneath all that armour is a baby girl who eats plenty, talks freely, and loves with her whole chest — even while pretending she doesn't.
-    </p>
+          <p class="body-p fl">
+            You act tough. And you genuinely are. But toughness is not your
+            whole story. It is the cover of a book whose pages are warm and soft
+            and full. Beneath all that armour is a baby girl who eats plenty,
+            talks freely, and loves with her whole chest.
+          </p>
 
-    <p class="body-p fl" style="margin-top:.7rem;">
-      You will never admit how caring you are. But love like yours doesn't stay hidden — it <span class="serif-em">acts.</span> It picks up the spoon without being asked. It shows up without announcement. It bullies you, so cutely, into accepting it. That is who you are: not someone who talks about love, but someone who simply <strong>does it.</strong>
-    </p>
+          <p class="body-p fl" style="margin-top: 0.7rem">
+            You will never admit how caring you are. But love like yours doesn't
+            stay hidden, it <span class="serif-em">acts.</span> It picks up the
+            spoon without being asked. It shows up without announcement. It
+            bullies you, so cutely, into accepting it. That is who you are: not
+            someone who talks about love, but someone who simply
+            <strong>does it.</strong>
+          </p>
 
-    <div class="orn fl">— ✦ —</div>
+          <div class="orn fl">— ✦ —</div>
 
-    <p class="body-p fl">
-      And your eyes. Your eyes deserve their own paragraph. When you listen to someone, you look at them with a patience so full of desire to understand that they feel, for a moment, like the only person alive. I have been on the receiving end of that look. I know what it does to a person.
-    </p>
+          <p class="body-p fl">
+            And your eyes. Your eyes deserve their own paragraph. When you
+            listen to someone, you look at them with a patience so full of
+            desire to understand that they feel, for a moment, like the only
+            person alive. I have been on the receiving end of that look. I know
+            what it does to a person.
+          </p>
 
-    <div class="fl">
-      <span class="open-quote">"</span>
-      <p class="pull-quote" style="font-size:1.25rem;margin:0;text-align:left;padding-left:.5rem;">
-        This is my person.
-      </p>
-    </div>
+          <div class="fl">
+            <span class="open-quote">"</span>
+            <p
+              class="pull-quote"
+              style="
+                font-size: 1.25rem;
+                margin: 0;
+                text-align: left;
+                padding-left: 0.5rem;
+              "
+            >
+              This is my person.
+            </p>
+          </div>
 
-    <p class="body-p fl" style="margin-top:.9rem;">
-      That was the thought — quiet, certain, unhurried — the first night I heard your voice soft and unfiltered and entirely yourself. You are the kind of woman who makes people sit down and rewrite everything they thought they knew about love. Not because you demanded it. Simply because you <span class="serif-em">showed them something truer.</span>
-    </p>
+          <p class="body-p fl" style="margin-top: 0.9rem">
+            That was the thought — quiet, certain, unhurried — the first night I
+            heard your voice soft and unfiltered and entirely yourself. You are
+            the kind of woman who makes people sit down and rewrite everything
+            they thought they knew about love. Not because you demanded it.
+            Simply because you
+            <span class="serif-em">showed them something truer.</span>
+          </p>
 
-    <p class="body-p fl" style="margin-top:.7rem;">
-      We haven't had years yet. But we've had long calls that stretch past midnight, shared movies, silences that never once felt empty — and you, exactly as you are, making ordinary moments feel like something worth remembering.
-    </p>
+          <p class="body-p fl" style="margin-top: 0.7rem">
+            We haven't had years yet. But we've had long calls that stretch past
+            midnight, shared movies, silences that never once felt empty. And
+            you, exactly as you are, making ordinary moments worth remembering.
+          </p>
 
-    <!-- bottom flourish -->
-    <div class="fl" style="text-align:center;margin:1.2rem 0;">
-      <svg width="160" height="22" viewBox="0 0 160 22" fill="none">
-        <path d="M10 11 Q40 3 80 11 Q120 19 150 11"
-          stroke="rgba(196,113,122,.35)" stroke-width=".7" fill="none"
-          style="stroke-dasharray:250;stroke-dashoffset:250;animation:draw-line 1.2s ease forwards .3s"/>
-        <circle cx="80" cy="11" r="2.5" fill="rgba(196,113,122,.45)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1s"/>
-      </svg>
-    </div>
+          <!-- bottom flourish -->
+          <div class="fl" style="text-align: center; margin: 1.2rem 0">
+            <svg width="160" height="22" viewBox="0 0 160 22" fill="none">
+              <path
+                d="M10 11 Q40 3 80 11 Q120 19 150 11"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+                fill="none"
+                style="
+                  stroke-dasharray: 250;
+                  stroke-dashoffset: 250;
+                  animation: draw-line 1.2s ease forwards 0.3s;
+                "
+              />
+              <circle
+                cx="80"
+                cy="11"
+                r="2.5"
+                fill="rgba(196,113,122,.45)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1s"
+              />
+            </svg>
+          </div>
 
-    <div style="text-align:center;">
-      <button class="btn fl" onclick="goTo(2)">
-        Keep reading
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-</div>
-</section>
+          <div style="text-align: center">
+            <button class="btn fl" onclick="goTo(2)">
+              Keep reading
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M12 5v14M5 12l7 7 7-7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P3 · VOICE NOTE 1
 ═══════════════════════════════════ -->
-<section class="page" id="p3">
-<div class="scene">
-  <!-- rose motif -->
-  <div class="frame-wrap fl">
-    <svg width="180" height="90" viewBox="0 0 180 90" fill="none">
-      <!-- left branch -->
-      <path style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw-line 1.4s ease forwards .3s"
-        d="M10 80 Q30 60 50 50 Q40 35 55 25 Q48 15 60 10"
-        stroke="rgba(196,113,122,.45)" stroke-width=".8" fill="none"/>
-      <!-- right branch -->
-      <path style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw-line 1.4s ease forwards .4s"
-        d="M170 80 Q150 60 130 50 Q140 35 125 25 Q132 15 120 10"
-        stroke="rgba(196,113,122,.45)" stroke-width=".8" fill="none"/>
-      <!-- left rose -->
-      <g style="opacity:0;animation:fade-in .6s ease forwards 1.2s">
-        <circle cx="59" cy="10" r="7" fill="none" stroke="rgba(196,113,122,.5)" stroke-width=".8"/>
-        <circle cx="59" cy="10" r="4" fill="none" stroke="rgba(196,113,122,.4)" stroke-width=".7"/>
-        <circle cx="59" cy="10" r="1.5" fill="rgba(196,113,122,.6)"/>
-      </g>
-      <!-- right rose -->
-      <g style="opacity:0;animation:fade-in .6s ease forwards 1.2s">
-        <circle cx="121" cy="10" r="7" fill="none" stroke="rgba(196,113,122,.5)" stroke-width=".8"/>
-        <circle cx="121" cy="10" r="4" fill="none" stroke="rgba(196,113,122,.4)" stroke-width=".7"/>
-        <circle cx="121" cy="10" r="1.5" fill="rgba(196,113,122,.6)"/>
-      </g>
-      <!-- tiny leaves -->
-      <path style="opacity:0;animation:fade-in .4s ease forwards 1.5s"
-        d="M45 30 Q38 22 44 18 Q43 26 45 30Z" fill="rgba(196,113,122,.35)"/>
-      <path style="opacity:0;animation:fade-in .4s ease forwards 1.5s"
-        d="M135 30 Q142 22 136 18 Q137 26 135 30Z" fill="rgba(196,113,122,.35)"/>
-      <!-- center -->
-      <path style="stroke-dasharray:80;stroke-dashoffset:80;animation:draw-line .8s ease forwards 1s"
-        d="M70 80 Q90 65 110 80"
-        stroke="rgba(196,113,122,.3)" stroke-width=".6" fill="none"/>
-    </svg>
-  </div>
+    <section class="page" id="p3">
+      <div class="scene">
+        <!-- rose motif -->
+        <div class="frame-wrap fl">
+          <svg width="180" height="90" viewBox="0 0 180 90" fill="none">
+            <!-- left branch -->
+            <path
+              style="
+                stroke-dasharray: 200;
+                stroke-dashoffset: 200;
+                animation: draw-line 1.4s ease forwards 0.3s;
+              "
+              d="M10 80 Q30 60 50 50 Q40 35 55 25 Q48 15 60 10"
+              stroke="rgba(196,113,122,.45)"
+              stroke-width=".8"
+              fill="none"
+            />
+            <!-- right branch -->
+            <path
+              style="
+                stroke-dasharray: 200;
+                stroke-dashoffset: 200;
+                animation: draw-line 1.4s ease forwards 0.4s;
+              "
+              d="M170 80 Q150 60 130 50 Q140 35 125 25 Q132 15 120 10"
+              stroke="rgba(196,113,122,.45)"
+              stroke-width=".8"
+              fill="none"
+            />
+            <!-- left rose -->
+            <g style="opacity: 0; animation: fade-in 0.6s ease forwards 1.2s">
+              <circle
+                cx="59"
+                cy="10"
+                r="7"
+                fill="none"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".8"
+              />
+              <circle
+                cx="59"
+                cy="10"
+                r="4"
+                fill="none"
+                stroke="rgba(196,113,122,.4)"
+                stroke-width=".7"
+              />
+              <circle cx="59" cy="10" r="1.5" fill="rgba(196,113,122,.6)" />
+            </g>
+            <!-- right rose -->
+            <g style="opacity: 0; animation: fade-in 0.6s ease forwards 1.2s">
+              <circle
+                cx="121"
+                cy="10"
+                r="7"
+                fill="none"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".8"
+              />
+              <circle
+                cx="121"
+                cy="10"
+                r="4"
+                fill="none"
+                stroke="rgba(196,113,122,.4)"
+                stroke-width=".7"
+              />
+              <circle cx="121" cy="10" r="1.5" fill="rgba(196,113,122,.6)" />
+            </g>
+            <!-- tiny leaves -->
+            <path
+              style="opacity: 0; animation: fade-in 0.4s ease forwards 1.5s"
+              d="M45 30 Q38 22 44 18 Q43 26 45 30Z"
+              fill="rgba(196,113,122,.35)"
+            />
+            <path
+              style="opacity: 0; animation: fade-in 0.4s ease forwards 1.5s"
+              d="M135 30 Q142 22 136 18 Q137 26 135 30Z"
+              fill="rgba(196,113,122,.35)"
+            />
+            <!-- center -->
+            <path
+              style="
+                stroke-dasharray: 80;
+                stroke-dashoffset: 80;
+                animation: draw-line 0.8s ease forwards 1s;
+              "
+              d="M70 80 Q90 65 110 80"
+              stroke="rgba(196,113,122,.3)"
+              stroke-width=".6"
+              fill="none"
+            />
+          </svg>
+        </div>
 
-  <div class="eyebrow fl">voice note · one</div>
-  <h2 class="pull-quote fl" style="font-size:clamp(1.4rem,5.5vw,2rem);margin-bottom:.3rem;">
-    2 a.m. thoughts of you
-  </h2>
+        <div class="eyebrow fl">voice note · one</div>
+        <h2
+          class="pull-quote fl"
+          style="font-size: clamp(1.4rem, 5.5vw, 2rem); margin-bottom: 0.3rem"
+        >
+          2 a.m. thoughts of you
+        </h2>
 
-  <div class="rule-fancy fl" style="width:180px;">
-    <span style="font-size:.5rem;">recorded at night</span>
-  </div>
+        <div class="rule-fancy fl" style="width: 180px">
+          <span style="font-size: 0.5rem">recorded at night</span>
+        </div>
 
-  <p class="body-p fl" style="text-align:center;max-width:28ch;margin:0 auto .3rem;">
-    I recorded this when my voice was softest and my thoughts were most honest.
-  </p>
+        <p
+          class="body-p fl"
+          style="text-align: center; max-width: 28ch; margin: 0 auto 0.3rem"
+        >
+          I recorded this when my voice was softest and my thoughts were most
+          honest.
+        </p>
 
-  <div class="a-card fl" style="margin-top:1.2rem;">
-    <div class="a-label">press play</div>
-    <div class="a-title">"I still listen for that softness in your voice, every night."</div>
-    <button class="play-btn" id="play1" onclick="toggleAudio('audio1','play1')">
-      <svg class="pi" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-      <svg class="pau" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </button>
-    <div class="a-sub">close your eyes ♡</div>
-  </div>
+        <div class="a-card fl" style="margin-top: 1.2rem">
+          <div class="a-label">press play</div>
+          <div class="a-title">
+            "I still listen for that softness in your voice, every night."
+          </div>
+          <button
+            class="play-btn"
+            id="play1"
+            onclick="toggleAudio('audio1', 'play1')"
+          >
+            <svg
+              class="pi"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5.14v14l11-7-11-7z" />
+            </svg>
+            <svg
+              class="pau"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </button>
+          <div class="a-sub">close your eyes ♡</div>
+        </div>
 
-  <button class="btn fl" onclick="goTo(3)">
-    There's more
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-</div>
-</section>
+        <button class="btn fl" onclick="goTo(3)">
+          There's more
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
 
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P4 · BRIDGE
 ═══════════════════════════════════ -->
-<section class="page" id="p4">
-<div class="scene">
-  <div class="letter-inner">
-    <div class="eyebrow fl" style="text-align:center;">from late nights to forever</div>
+    <section class="page" id="p4">
+      <div class="scene">
+        <div class="letter-inner">
+          <div class="eyebrow fl" style="text-align: center">
+            from late nights to forever
+          </div>
 
-    <div class="fl" style="text-align:center;margin-bottom:1.1rem;">
-      <svg width="220" height="32" viewBox="0 0 220 32" fill="none">
-        <!-- double wave flourish -->
-        <path d="M10 20 Q30 8 55 20 Q80 32 105 20 Q130 8 155 20 Q180 32 210 20"
-          stroke="rgba(196,113,122,.35)" stroke-width=".7" fill="none"
-          style="stroke-dasharray:350;stroke-dashoffset:350;animation:draw-line 1.6s ease forwards .4s"/>
-        <path d="M10 12 Q30 2 55 12 Q80 22 105 12 Q130 2 155 12 Q180 22 210 12"
-          stroke="rgba(196,113,122,.2)" stroke-width=".5" fill="none"
-          style="stroke-dasharray:350;stroke-dashoffset:350;animation:draw-line 1.6s ease forwards .6s"/>
-      </svg>
-    </div>
+          <div class="fl" style="text-align: center; margin-bottom: 1.1rem">
+            <svg width="220" height="32" viewBox="0 0 220 32" fill="none">
+              <!-- double wave flourish -->
+              <path
+                d="M10 20 Q30 8 55 20 Q80 32 105 20 Q130 8 155 20 Q180 32 210 20"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+                fill="none"
+                style="
+                  stroke-dasharray: 350;
+                  stroke-dashoffset: 350;
+                  animation: draw-line 1.6s ease forwards 0.4s;
+                "
+              />
+              <path
+                d="M10 12 Q30 2 55 12 Q80 22 105 12 Q130 2 155 12 Q180 22 210 12"
+                stroke="rgba(196,113,122,.2)"
+                stroke-width=".5"
+                fill="none"
+                style="
+                  stroke-dasharray: 350;
+                  stroke-dashoffset: 350;
+                  animation: draw-line 1.6s ease forwards 0.6s;
+                "
+              />
+            </svg>
+          </div>
 
-    <p class="body-p fl">From those long calls and shared silences, you started dreaming out loud — and you let me listen. That is one of the most generous things a person can do.</p>
+          <p class="body-p fl">
+            From those long calls and shared silences, you started dreaming out
+            loud and you let me listen. That is one of the most generous things
+            a person can do.
+          </p>
 
-    <div class="fl" style="margin:1rem 0;padding:.9rem 1.1rem;
-      border-left:2px solid rgba(196,113,122,.4);
-      background:rgba(196,113,122,.04);border-radius:0 10px 10px 0;">
-      <p class="pull-quote" style="font-size:1.15rem;text-align:left;margin:0;max-width:100%;">
-        A wedding dreamed aloud.<br>A duet not yet sung.<br>A forever still being written.
-      </p>
-    </div>
+          <div
+            class="fl"
+            style="
+              margin: 1rem 0;
+              padding: 0.9rem 1.1rem;
+              border-left: 2px solid rgba(196, 113, 122, 0.4);
+              background: rgba(196, 113, 122, 0.04);
+              border-radius: 0 10px 10px 0;
+            "
+          >
+            <p
+              class="pull-quote"
+              style="
+                font-size: 1.15rem;
+                text-align: left;
+                margin: 0;
+                max-width: 100%;
+              "
+            >
+              A wedding dreamed aloud.<br />A duet not yet sung.<br />A forever
+              still being written.
+            </p>
+          </div>
 
-    <p class="body-p fl">You are excited by intentionality — by moments that say <span class="serif-em">"I see you, I planned this, you matter."</span> So that is what this is. A small, deliberate universe built entirely for you.</p>
-    <p class="body-p fl" style="margin-top:.5rem;">
-      You called me your sweet boy, and I became one. You declared yourself a Queen, and the rest of us simply adjusted our posture accordingly. <span class="serif-em">(The singing, we will debate. Later.)</span>
-    </p>
+          <p class="body-p fl">
+            You are excited by intentionality, by moments that say
+            <span class="serif-em"
+              >"I see you, I planned this, you matter."</span
+            >
+            So that is what this is. A small, deliberate universe built entirely
+            for you.
+          </p>
+          <p class="body-p fl" style="margin-top: 0.5rem">
+            You called me your sweet boy, and I became one. You declared
+            yourself a Queen, and the rest of us simply adjusted our posture
+            accordingly.
+            <span class="serif-em">(The singing, we will debate. Later.)</span>
+          </p>
 
-    <div class="orn fl" style="margin:1.2rem 0;">— ♡ —</div>
+          <div class="orn fl" style="margin: 1.2rem 0">— ♡ —</div>
 
-    <p class="pull-quote fl" style="font-size:1.1rem;font-style:italic;text-align:left;max-width:100%;">
-      Today is for you, Oluwatoyosi.<br>Not who you are to me — but who you simply <em>are.</em>
-    </p>
+          <p
+            class="pull-quote fl"
+            style="
+              font-size: 1.1rem;
+              font-style: italic;
+              text-align: left;
+              max-width: 100%;
+            "
+          >
+            Today is for you, Oluwatoyosi.<br />Not who you are to me but who
+            you simply <em>are.</em>
+          </p>
 
-    <div class="fl" style="text-align:center;margin:.8rem 0;">
-      <svg width="180" height="26" viewBox="0 0 180 26" fill="none">
-        <path d="M10 13 Q45 3 90 13 Q135 23 170 13"
-          stroke="rgba(196,113,122,.3)" stroke-width=".7" fill="none"
-          style="stroke-dasharray:260;stroke-dashoffset:260;animation:draw-line 1.3s ease forwards .3s"/>
-        <circle cx="90" cy="13" r="2" fill="rgba(196,113,122,.5)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1s"/>
-        <circle cx="30" cy="10" r="1.5" fill="rgba(196,113,122,.3)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1.2s"/>
-        <circle cx="150" cy="10" r="1.5" fill="rgba(196,113,122,.3)"
-          style="opacity:0;animation:fade-in .4s ease forwards 1.2s"/>
-      </svg>
-    </div>
+          <div class="fl" style="text-align: center; margin: 0.8rem 0">
+            <svg width="180" height="26" viewBox="0 0 180 26" fill="none">
+              <path
+                d="M10 13 Q45 3 90 13 Q135 23 170 13"
+                stroke="rgba(196,113,122,.3)"
+                stroke-width=".7"
+                fill="none"
+                style="
+                  stroke-dasharray: 260;
+                  stroke-dashoffset: 260;
+                  animation: draw-line 1.3s ease forwards 0.3s;
+                "
+              />
+              <circle
+                cx="90"
+                cy="13"
+                r="2"
+                fill="rgba(196,113,122,.5)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1s"
+              />
+              <circle
+                cx="30"
+                cy="10"
+                r="1.5"
+                fill="rgba(196,113,122,.3)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1.2s"
+              />
+              <circle
+                cx="150"
+                cy="10"
+                r="1.5"
+                fill="rgba(196,113,122,.3)"
+                style="opacity: 0; animation: fade-in 0.4s ease forwards 1.2s"
+              />
+            </svg>
+          </div>
 
-    <div style="text-align:center;">
-      <button class="btn fl" onclick="goTo(4)">
-        One last thing
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-    </div>
-  </div>
-</div>
-</section>
+          <div style="text-align: center">
+            <button class="btn fl" onclick="goTo(4)">
+              One last thing
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M12 5v14M5 12l7 7 7-7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P5 · VOICE NOTE 2 + VOUCHER
 ═══════════════════════════════════ -->
-<section class="page" id="p5">
-<div class="scene">
-  <!-- crown ornament -->
-  <div class="frame-wrap fl">
-    <svg width="200" height="70" viewBox="0 0 200 70" fill="none">
-      <!-- crown base -->
-      <path style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw-line 1.4s ease forwards .3s"
-        d="M40 55 L40 35 L65 50 L100 20 L135 50 L160 35 L160 55 Z"
-        stroke="rgba(196,113,122,.5)" stroke-width=".9" fill="none"
-        stroke-linejoin="round" stroke-linecap="round"/>
-      <!-- jewels -->
-      <circle cx="100" cy="20" r="4" fill="none" stroke="rgba(196,113,122,.6)" stroke-width=".8"
-        style="opacity:0;animation:fade-in .5s ease forwards 1.2s"/>
-      <circle cx="100" cy="20" r="1.5" fill="rgba(196,113,122,.7)"
-        style="opacity:0;animation:fade-in .5s ease forwards 1.4s"/>
-      <circle cx="40" cy="35" r="2.5" fill="rgba(196,113,122,.4)"
-        style="opacity:0;animation:fade-in .4s ease forwards 1.5s"/>
-      <circle cx="160" cy="35" r="2.5" fill="rgba(196,113,122,.4)"
-        style="opacity:0;animation:fade-in .4s ease forwards 1.5s"/>
-      <!-- base line -->
-      <path style="stroke-dasharray:130;stroke-dashoffset:130;animation:draw-line .8s ease forwards 1.4s"
-        d="M35 55 L165 55" stroke="rgba(196,113,122,.4)" stroke-width=".8" fill="none"/>
-      <!-- base ornament -->
-      <path style="stroke-dasharray:100;stroke-dashoffset:100;animation:draw-line .8s ease forwards 1.6s"
-        d="M55 62 Q100 68 145 62"
-        stroke="rgba(196,113,122,.3)" stroke-width=".6" fill="none"/>
-    </svg>
-  </div>
+    <section class="page" id="p5">
+      <div class="scene">
+        <!-- crown ornament -->
+        <div class="frame-wrap fl">
+          <svg width="200" height="70" viewBox="0 0 200 70" fill="none">
+            <!-- crown base -->
+            <path
+              style="
+                stroke-dasharray: 300;
+                stroke-dashoffset: 300;
+                animation: draw-line 1.4s ease forwards 0.3s;
+              "
+              d="M40 55 L40 35 L65 50 L100 20 L135 50 L160 35 L160 55 Z"
+              stroke="rgba(196,113,122,.5)"
+              stroke-width=".9"
+              fill="none"
+              stroke-linejoin="round"
+              stroke-linecap="round"
+            />
+            <!-- jewels -->
+            <circle
+              cx="100"
+              cy="20"
+              r="4"
+              fill="none"
+              stroke="rgba(196,113,122,.6)"
+              stroke-width=".8"
+              style="opacity: 0; animation: fade-in 0.5s ease forwards 1.2s"
+            />
+            <circle
+              cx="100"
+              cy="20"
+              r="1.5"
+              fill="rgba(196,113,122,.7)"
+              style="opacity: 0; animation: fade-in 0.5s ease forwards 1.4s"
+            />
+            <circle
+              cx="40"
+              cy="35"
+              r="2.5"
+              fill="rgba(196,113,122,.4)"
+              style="opacity: 0; animation: fade-in 0.4s ease forwards 1.5s"
+            />
+            <circle
+              cx="160"
+              cy="35"
+              r="2.5"
+              fill="rgba(196,113,122,.4)"
+              style="opacity: 0; animation: fade-in 0.4s ease forwards 1.5s"
+            />
+            <!-- base line -->
+            <path
+              style="
+                stroke-dasharray: 130;
+                stroke-dashoffset: 130;
+                animation: draw-line 0.8s ease forwards 1.4s;
+              "
+              d="M35 55 L165 55"
+              stroke="rgba(196,113,122,.4)"
+              stroke-width=".8"
+              fill="none"
+            />
+            <!-- base ornament -->
+            <path
+              style="
+                stroke-dasharray: 100;
+                stroke-dashoffset: 100;
+                animation: draw-line 0.8s ease forwards 1.6s;
+              "
+              d="M55 62 Q100 68 145 62"
+              stroke="rgba(196,113,122,.3)"
+              stroke-width=".6"
+              fill="none"
+            />
+          </svg>
+        </div>
 
-  <div class="eyebrow fl">your birthday duet rehearsal</div>
-  <h2 class="pull-quote fl" style="font-size:clamp(1.3rem,5vw,1.9rem);margin-bottom:.3rem;">
-    Consider this my <em>audition</em>
-  </h2>
-  <p class="body-p fl" style="text-align:center;max-width:26ch;margin:.3rem auto 1.3rem;">
-    You call me your sweet boy — today I'm your birthday bard.
-  </p>
+        <div class="eyebrow fl">your birthday duet rehearsal</div>
+        <h2
+          class="pull-quote fl"
+          style="font-size: clamp(1.3rem, 5vw, 1.9rem); margin-bottom: 0.3rem"
+        >
+          Consider this my <em>audition</em>
+        </h2>
+        <p
+          class="body-p fl"
+          style="
+            text-align: center;
+            max-width: 26ch;
+            margin: 0.3rem auto 1.3rem;
+          "
+        >
+          You call me your sweet boy and today I'm your birthday bard.
+        </p>
 
-  <div class="a-card fl">
-    <div class="a-label">voice note · two</div>
-    <div class="a-title">"Press play, my Queen."</div>
-    <button class="play-btn" id="play2" onclick="toggleAudio('audio2','play2')">
-      <svg class="pi" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-      <svg class="pau" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </button>
-    <div class="a-sub">your turn next, Queen ♡</div>
-  </div>
+        <div class="a-card fl">
+          <div class="a-label">voice note · two</div>
+          <div class="a-title">"Press play, my Queen."</div>
+          <button
+            class="play-btn"
+            id="play2"
+            onclick="toggleAudio('audio2', 'play2')"
+          >
+            <svg
+              class="pi"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M8 5.14v14l11-7-11-7z" />
+            </svg>
+            <svg
+              class="pau"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </button>
+          <div class="a-sub">your turn next, Queen ♡</div>
+        </div>
 
-  <div class="rule-fancy fl" style="width:200px;margin-top:1.5rem;"><span>✦ a promise ✦</span></div>
+        <div class="rule-fancy fl" style="width: 200px; margin-top: 1.5rem">
+          <span>✦ a promise ✦</span>
+        </div>
 
-  <div class="voucher fl">
-    <div class="v-label">✦ official voucher ✦</div>
-    <div class="v-main">One full wedding duet rehearsal</div>
-    <div class="v-fine">Date: anytime, anywhere<br>Bullying lovingly allowed · (I'm still better.)</div>
-    <button class="v-claim" id="claim-btn" onclick="claimIt()">Claim this</button>
-    <p id="claimed-msg">It's a date. I'm already practising. 🎤</p>
-  </div>
+        <div class="voucher fl">
+          <div class="v-label">✦ official voucher ✦</div>
+          <div class="v-main">One full wedding duet rehearsal</div>
+          <div class="v-fine">
+            Date: anytime, anywhere<br />Bullying lovingly allowed · (I'm still
+            better.)
+          </div>
+          <button class="v-claim" id="claim-btn" onclick="claimIt()">
+            Claim this
+          </button>
+          <p id="claimed-msg">It's a date. I'm already practising. 🎤</p>
+        </div>
 
-  <button class="btn fl" onclick="goTo(5)">
-    The beginning ♡
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </button>
-</div>
-</section>
+        <button class="btn fl" onclick="goTo(5)">
+          The beginning ♡
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path
+              d="M12 5v14M5 12l7 7 7-7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </section>
 
-<!-- ═══════════════════════════════════
+    <!-- ═══════════════════════════════════
   P6 · QUIET END
 ═══════════════════════════════════ -->
-<section class="page" id="p6" style="overflow:hidden;position:relative;">
-<div class="scene" style="position:relative;z-index:2;">
-  <!-- large symmetrical floral frame -->
-  <div class="frame-wrap fl">
-    <svg width="260" height="100" viewBox="0 0 260 100" fill="none">
-      <!-- left vine -->
-      <path style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw-line 1.6s ease forwards .2s"
-        d="M10 95 Q25 70 35 55 Q20 40 35 28 Q25 15 40 8"
-        stroke="rgba(196,113,122,.4)" stroke-width=".8" fill="none"/>
-      <!-- right vine mirror -->
-      <path style="stroke-dasharray:300;stroke-dashoffset:300;animation:draw-line 1.6s ease forwards .2s"
-        d="M250 95 Q235 70 225 55 Q240 40 225 28 Q235 15 220 8"
-        stroke="rgba(196,113,122,.4)" stroke-width=".8" fill="none"/>
-      <!-- left blooms -->
-      <g style="opacity:0;animation:fade-in .6s ease forwards 1.2s">
-        <circle cx="39" cy="8" r="8" fill="none" stroke="rgba(196,113,122,.45)" stroke-width=".8"/>
-        <circle cx="39" cy="8" r="5" fill="none" stroke="rgba(196,113,122,.35)" stroke-width=".7"/>
-        <circle cx="39" cy="8" r="2" fill="rgba(196,113,122,.55)"/>
-        <circle cx="22" cy="26" r="5" fill="none" stroke="rgba(196,113,122,.35)" stroke-width=".7"/>
-        <circle cx="22" cy="26" r="2" fill="rgba(196,113,122,.4)"/>
-      </g>
-      <!-- right blooms -->
-      <g style="opacity:0;animation:fade-in .6s ease forwards 1.2s">
-        <circle cx="221" cy="8" r="8" fill="none" stroke="rgba(196,113,122,.45)" stroke-width=".8"/>
-        <circle cx="221" cy="8" r="5" fill="none" stroke="rgba(196,113,122,.35)" stroke-width=".7"/>
-        <circle cx="221" cy="8" r="2" fill="rgba(196,113,122,.55)"/>
-        <circle cx="238" cy="26" r="5" fill="none" stroke="rgba(196,113,122,.35)" stroke-width=".7"/>
-        <circle cx="238" cy="26" r="2" fill="rgba(196,113,122,.4)"/>
-      </g>
-      <!-- leaves -->
-      <g style="opacity:0;animation:fade-in .4s ease forwards 1.5s">
-        <path d="M28 44 Q20 34 27 30 Q25 40 28 44Z" fill="rgba(196,113,122,.3)"/>
-        <path d="M44 38 Q52 28 49 24 Q45 34 44 38Z" fill="rgba(196,113,122,.25)"/>
-        <path d="M232 44 Q240 34 233 30 Q235 40 232 44Z" fill="rgba(196,113,122,.3)"/>
-        <path d="M216 38 Q208 28 211 24 Q215 34 216 38Z" fill="rgba(196,113,122,.25)"/>
-      </g>
-      <!-- center arch -->
-      <path style="stroke-dasharray:250;stroke-dashoffset:250;animation:draw-line 1.4s ease forwards .8s"
-        d="M50 95 Q70 60 130 40 Q190 60 210 95"
-        stroke="rgba(196,113,122,.3)" stroke-width=".7" fill="none"/>
-      <!-- center heart -->
-      <g style="opacity:0;animation:fade-in .8s ease forwards 1.8s">
-        <path d="M122 40 C122 40 122 34 128 34 C131 34 133 36.5 133 36.5 C133 36.5 135 34 138 34 C144 34 144 40 144 40 C144 46 138 50 133 54 C128 50 122 46 122 40Z"
-          fill="rgba(196,113,122,.35)" stroke="rgba(196,113,122,.5)" stroke-width=".7"/>
-      </g>
-      <!-- base flourish -->
-      <path style="stroke-dasharray:200;stroke-dashoffset:200;animation:draw-line 1s ease forwards 1s"
-        d="M40 95 Q90 88 130 92 Q170 88 220 95"
-        stroke="rgba(196,113,122,.25)" stroke-width=".6" fill="none"/>
-    </svg>
-  </div>
+    <section class="page" id="p6" style="overflow: hidden; position: relative">
+      <div class="scene" style="position: relative; z-index: 2">
+        <!-- large symmetrical floral frame -->
+        <div class="frame-wrap fl">
+          <svg width="260" height="100" viewBox="0 0 260 100" fill="none">
+            <!-- left vine -->
+            <path
+              style="
+                stroke-dasharray: 300;
+                stroke-dashoffset: 300;
+                animation: draw-line 1.6s ease forwards 0.2s;
+              "
+              d="M10 95 Q25 70 35 55 Q20 40 35 28 Q25 15 40 8"
+              stroke="rgba(196,113,122,.4)"
+              stroke-width=".8"
+              fill="none"
+            />
+            <!-- right vine mirror -->
+            <path
+              style="
+                stroke-dasharray: 300;
+                stroke-dashoffset: 300;
+                animation: draw-line 1.6s ease forwards 0.2s;
+              "
+              d="M250 95 Q235 70 225 55 Q240 40 225 28 Q235 15 220 8"
+              stroke="rgba(196,113,122,.4)"
+              stroke-width=".8"
+              fill="none"
+            />
+            <!-- left blooms -->
+            <g style="opacity: 0; animation: fade-in 0.6s ease forwards 1.2s">
+              <circle
+                cx="39"
+                cy="8"
+                r="8"
+                fill="none"
+                stroke="rgba(196,113,122,.45)"
+                stroke-width=".8"
+              />
+              <circle
+                cx="39"
+                cy="8"
+                r="5"
+                fill="none"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+              />
+              <circle cx="39" cy="8" r="2" fill="rgba(196,113,122,.55)" />
+              <circle
+                cx="22"
+                cy="26"
+                r="5"
+                fill="none"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+              />
+              <circle cx="22" cy="26" r="2" fill="rgba(196,113,122,.4)" />
+            </g>
+            <!-- right blooms -->
+            <g style="opacity: 0; animation: fade-in 0.6s ease forwards 1.2s">
+              <circle
+                cx="221"
+                cy="8"
+                r="8"
+                fill="none"
+                stroke="rgba(196,113,122,.45)"
+                stroke-width=".8"
+              />
+              <circle
+                cx="221"
+                cy="8"
+                r="5"
+                fill="none"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+              />
+              <circle cx="221" cy="8" r="2" fill="rgba(196,113,122,.55)" />
+              <circle
+                cx="238"
+                cy="26"
+                r="5"
+                fill="none"
+                stroke="rgba(196,113,122,.35)"
+                stroke-width=".7"
+              />
+              <circle cx="238" cy="26" r="2" fill="rgba(196,113,122,.4)" />
+            </g>
+            <!-- leaves -->
+            <g style="opacity: 0; animation: fade-in 0.4s ease forwards 1.5s">
+              <path
+                d="M28 44 Q20 34 27 30 Q25 40 28 44Z"
+                fill="rgba(196,113,122,.3)"
+              />
+              <path
+                d="M44 38 Q52 28 49 24 Q45 34 44 38Z"
+                fill="rgba(196,113,122,.25)"
+              />
+              <path
+                d="M232 44 Q240 34 233 30 Q235 40 232 44Z"
+                fill="rgba(196,113,122,.3)"
+              />
+              <path
+                d="M216 38 Q208 28 211 24 Q215 34 216 38Z"
+                fill="rgba(196,113,122,.25)"
+              />
+            </g>
+            <!-- center arch -->
+            <path
+              style="
+                stroke-dasharray: 250;
+                stroke-dashoffset: 250;
+                animation: draw-line 1.4s ease forwards 0.8s;
+              "
+              d="M50 95 Q70 60 130 40 Q190 60 210 95"
+              stroke="rgba(196,113,122,.3)"
+              stroke-width=".7"
+              fill="none"
+            />
+            <!-- center heart -->
+            <g style="opacity: 0; animation: fade-in 0.8s ease forwards 1.8s">
+              <path
+                d="M122 40 C122 40 122 34 128 34 C131 34 133 36.5 133 36.5 C133 36.5 135 34 138 34 C144 34 144 40 144 40 C144 46 138 50 133 54 C128 50 122 46 122 40Z"
+                fill="rgba(196,113,122,.35)"
+                stroke="rgba(196,113,122,.5)"
+                stroke-width=".7"
+              />
+            </g>
+            <!-- base flourish -->
+            <path
+              style="
+                stroke-dasharray: 200;
+                stroke-dashoffset: 200;
+                animation: draw-line 1s ease forwards 1s;
+              "
+              d="M40 95 Q90 88 130 92 Q170 88 220 95"
+              stroke="rgba(196,113,122,.25)"
+              stroke-width=".6"
+              fill="none"
+            />
+          </svg>
+        </div>
 
-  <div class="eyebrow fl">always & only</div>
+        <div class="eyebrow fl">always & only</div>
 
-  <p class="end-big fl">
-    The world doesn't yet know it fully — but Oluwatoyosi is the kind of woman who makes you rewrite everything you thought you knew about <em>love.</em>
-  </p>
+        <p class="end-big fl">
+          The world doesn't yet know it fully but Oluwatoyosi is the kind of
+          woman who makes you rewrite everything you thought you knew about
+          <em>love.</em>
+        </p>
 
-  <div class="rule-fancy fl" style="width:180px;margin-top:.8rem;">
-    <span>♡</span>
-  </div>
+        <div class="rule-fancy fl" style="width: 180px; margin-top: 0.8rem">
+          <span>♡</span>
+        </div>
 
-  <p class="pull-quote fl" style="font-size:1.05rem;color:var(--ink2);">
-    Happy birthday, my Queen.<br>You are magnificent.
-  </p>
-  <p class="end-sig fl">— Your sweet boy</p>
+        <p class="pull-quote fl" style="font-size: 1.05rem; color: var(--ink2)">
+          Happy birthday, my Queen.<br />You are magnificent.
+        </p>
+        <p class="end-sig fl">— Your sweet boy ❤️</p>
 
-  <div class="replay-row fl">
-    <button class="r-btn" onclick="goTo(0)" title="Back to start">↩</button>
-    <button class="r-btn" onclick="toggleAudio('audio1','rp1')" id="rp1" title="Voice note 1">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-    </button>
-    <button class="r-btn" onclick="toggleAudio('audio2','rp2')" id="rp2" title="Voice note 2">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"/></svg>
-    </button>
-  </div>
-</div>
-</section>
+        <div class="replay-row fl">
+          <button class="r-btn" onclick="goTo(0)" title="Back to start">
+            ↩
+          </button>
+          <button
+            class="r-btn"
+            onclick="toggleAudio('audio1', 'rp1')"
+            id="rp1"
+            title="Voice note 1"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5.14v14l11-7-11-7z" />
+            </svg>
+          </button>
+          <button
+            class="r-btn"
+            onclick="toggleAudio('audio2', 'rp2')"
+            id="rp2"
+            title="Voice note 2"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5.14v14l11-7-11-7z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
 
-<style>
-@keyframes fade-in{from{opacity:0;}to{opacity:1;}}
-</style>
+    <style>
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
 
-<script>
-/* ── CANVAS BACKGROUND — shifting velvet depth + floating motes ── */
-(function(){
-  const c=document.getElementById('bg-canvas');
-  const ctx=c.getContext('2d');
-  let W,H,motes=[];
-  function resize(){
-    W=c.width=innerWidth;H=c.height=innerHeight;
-    drawBg();
-  }
-  function drawBg(){
-    /* base deep plum gradient */
-    const g=ctx.createRadialGradient(W*.5,H*.3,0,W*.5,H*.5,Math.max(W,H)*.8);
-    g.addColorStop(0,'#2d0f2e');
-    g.addColorStop(.45,'#1a0818');
-    g.addColorStop(1,'#0d0810');
-    ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
-    /* jewel bloom top-right */
-    const g2=ctx.createRadialGradient(W*.85,H*.1,0,W*.85,H*.1,W*.4);
-    g2.addColorStop(0,'rgba(122,26,80,.28)');
-    g2.addColorStop(1,'transparent');
-    ctx.fillStyle=g2;ctx.fillRect(0,0,W,H);
-    /* rose bloom bottom-left */
-    const g3=ctx.createRadialGradient(W*.1,H*.85,0,W*.1,H*.85,W*.35);
-    g3.addColorStop(0,'rgba(196,113,122,.14)');
-    g3.addColorStop(1,'transparent');
-    ctx.fillStyle=g3;ctx.fillRect(0,0,W,H);
-  }
-  function initMotes(){
-    motes=[];
-    for(let i=0;i<55;i++) motes.push({
-      x:Math.random()*W,y:Math.random()*H,
-      r:Math.random()*.9+.2,
-      a:Math.random()*.5,da:(Math.random()-.5)*.006+.002,
-      vx:(Math.random()-.5)*.12,vy:-(Math.random()*.08+.02)
-    });
-  }
-  function tick(){
-    drawBg();
-    for(const m of motes){
-      m.a+=m.da;if(m.a>0.55||m.a<0)m.da*=-1;
-      m.x+=m.vx;m.y+=m.vy;
-      if(m.y<-4){m.y=H+4;m.x=Math.random()*W;}
-      if(m.x<-4)m.x=W+4;if(m.x>W+4)m.x=-4;
-      ctx.beginPath();
-      ctx.arc(m.x,m.y,m.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(245,222,179,${m.a*.6})`;
-      ctx.fill();
-    }
-    requestAnimationFrame(tick);
-  }
-  window.addEventListener('resize',()=>{resize();initMotes();});
-  resize();initMotes();tick();
-})();
+    <script>
+      /* ── CANVAS BACKGROUND — shifting velvet depth + floating motes ── */
+      (function () {
+        const c = document.getElementById("bg-canvas");
+        const ctx = c.getContext("2d");
+        let W,
+          H,
+          motes = [];
+        function resize() {
+          W = c.width = innerWidth;
+          H = c.height = innerHeight;
+          drawBg();
+        }
+        function drawBg() {
+          /* base deep plum gradient */
+          const g = ctx.createRadialGradient(
+            W * 0.5,
+            H * 0.3,
+            0,
+            W * 0.5,
+            H * 0.5,
+            Math.max(W, H) * 0.8,
+          );
+          g.addColorStop(0, "#2d0f2e");
+          g.addColorStop(0.45, "#1a0818");
+          g.addColorStop(1, "#0d0810");
+          ctx.fillStyle = g;
+          ctx.fillRect(0, 0, W, H);
+          /* jewel bloom top-right */
+          const g2 = ctx.createRadialGradient(
+            W * 0.85,
+            H * 0.1,
+            0,
+            W * 0.85,
+            H * 0.1,
+            W * 0.4,
+          );
+          g2.addColorStop(0, "rgba(122,26,80,.28)");
+          g2.addColorStop(1, "transparent");
+          ctx.fillStyle = g2;
+          ctx.fillRect(0, 0, W, H);
+          /* rose bloom bottom-left */
+          const g3 = ctx.createRadialGradient(
+            W * 0.1,
+            H * 0.85,
+            0,
+            W * 0.1,
+            H * 0.85,
+            W * 0.35,
+          );
+          g3.addColorStop(0, "rgba(196,113,122,.14)");
+          g3.addColorStop(1, "transparent");
+          ctx.fillStyle = g3;
+          ctx.fillRect(0, 0, W, H);
+        }
+        function initMotes() {
+          motes = [];
+          for (let i = 0; i < 55; i++)
+            motes.push({
+              x: Math.random() * W,
+              y: Math.random() * H,
+              r: Math.random() * 0.9 + 0.2,
+              a: Math.random() * 0.5,
+              da: (Math.random() - 0.5) * 0.006 + 0.002,
+              vx: (Math.random() - 0.5) * 0.12,
+              vy: -(Math.random() * 0.08 + 0.02),
+            });
+        }
+        function tick() {
+          drawBg();
+          for (const m of motes) {
+            m.a += m.da;
+            if (m.a > 0.55 || m.a < 0) m.da *= -1;
+            m.x += m.vx;
+            m.y += m.vy;
+            if (m.y < -4) {
+              m.y = H + 4;
+              m.x = Math.random() * W;
+            }
+            if (m.x < -4) m.x = W + 4;
+            if (m.x > W + 4) m.x = -4;
+            ctx.beginPath();
+            ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(245,222,179,${m.a * 0.6})`;
+            ctx.fill();
+          }
+          requestAnimationFrame(tick);
+        }
+        window.addEventListener("resize", () => {
+          resize();
+          initMotes();
+        });
+        resize();
+        initMotes();
+        tick();
+      })();
 
-/* ── PAGES ── */
-const pages=Array.from(document.querySelectorAll('.page'));
-const dots=Array.from(document.querySelectorAll('.d'));
-let cur=0;
+      /* ── PAGES ── */
+      const pages = Array.from(document.querySelectorAll(".page"));
+      const dots = Array.from(document.querySelectorAll(".d"));
+      let cur = 0;
 
-function goTo(n){
-  if(n===cur)return;
-  pages[cur].classList.add('exit');
-  const prev=cur;
-  setTimeout(()=>pages[prev].classList.remove('active','exit'),700);
-  dots[cur].classList.remove('on');
-  cur=n;
-  setTimeout(()=>{
-    pages[cur].classList.add('active');
-    dots[cur].classList.add('on');
-    reveal(pages[cur]);
-    if(n===5)spawnPetals();
-  },200);
-}
-dots.forEach((d,i)=>d.addEventListener('click',()=>goTo(i)));
+      function goTo(n) {
+        if (n === cur) return;
+        pages[cur].classList.add("exit");
+        const prev = cur;
+        setTimeout(() => pages[prev].classList.remove("active", "exit"), 700);
+        dots[cur].classList.remove("on");
+        cur = n;
+        setTimeout(() => {
+          pages[cur].classList.add("active");
+          dots[cur].classList.add("on");
+          reveal(pages[cur]);
+          if (n === 5) spawnPetals();
+        }, 200);
+      }
+      dots.forEach((d, i) => d.addEventListener("click", () => goTo(i)));
 
-function reveal(page){
-  page.querySelectorAll('.fl').forEach((el,i)=>{
-    setTimeout(()=>el.classList.add('s'),i*90+200);
-  });
-}
-reveal(pages[0]);
+      function reveal(page) {
+        page.querySelectorAll(".fl").forEach((el, i) => {
+          setTimeout(() => el.classList.add("s"), i * 90 + 200);
+        });
+      }
+      reveal(pages[0]);
 
-/* ── AUDIO ── */
-function toggleAudio(aid,bid){
-  const a=document.getElementById(aid);
-  const b=document.getElementById(bid);
-  if(!a)return;
-  if(a.paused){
-    ['audio1','audio2'].forEach(id=>{
-      const x=document.getElementById(id);
-      if(x&&x!==a)x.pause();
-    });
-    document.querySelectorAll('.play-btn').forEach(x=>x.classList.remove('playing'));
-    a.play().catch(()=>{});
-    if(b)b.classList.add('playing');
-  }else{
-    a.pause();
-    if(b)b.classList.remove('playing');
-  }
-  a.onended=()=>{if(b)b.classList.remove('playing');};
-}
+      /* ── AUDIO ── */
+      function toggleAudio(aid, bid) {
+        const a = document.getElementById(aid);
+        const b = document.getElementById(bid);
+        if (!a) return;
+        if (a.paused) {
+          ["audio1", "audio2"].forEach((id) => {
+            const x = document.getElementById(id);
+            if (x && x !== a) x.pause();
+          });
+          document
+            .querySelectorAll(".play-btn")
+            .forEach((x) => x.classList.remove("playing"));
+          a.play().catch(() => {});
+          if (b) b.classList.add("playing");
+        } else {
+          a.pause();
+          if (b) b.classList.remove("playing");
+        }
+        a.onended = () => {
+          if (b) b.classList.remove("playing");
+        };
+      }
 
-/* auto-start ambient softly on first interaction */
-const amb=document.getElementById('ambient-audio');
-document.addEventListener('click',()=>{
-  amb.volume=0.1;amb.play().catch(()=>{});
-},{once:true});
+      /* auto-start ambient softly on first interaction */
+      const amb = document.getElementById("ambient-audio");
+      document.addEventListener(
+        "click",
+        () => {
+          amb.volume = 0.3;
+          amb.play().catch(() => {});
+        },
+        { once: true },
+      );
 
-/* ── CONFETTI CLAIM ── */
-function claimIt(){
-  confetti({particleCount:220,spread:85,origin:{y:.55},
-    colors:['#c4717a','#f0b8c0','#fceae6','#8c1f5c','#f5deb3','#7a1a50']});
-  setTimeout(()=>{
-    document.getElementById('claim-btn').style.display='none';
-    document.getElementById('claimed-msg').style.display='block';
-  },350);
-}
+      /* ── CONFETTI CLAIM ── */
+      function claimIt() {
+        confetti({
+          particleCount: 220,
+          spread: 85,
+          origin: { y: 0.55 },
+          colors: [
+            "#c4717a",
+            "#f0b8c0",
+            "#fceae6",
+            "#8c1f5c",
+            "#f5deb3",
+            "#7a1a50",
+          ],
+        });
+        setTimeout(() => {
+          document.getElementById("claim-btn").style.display = "none";
+          document.getElementById("claimed-msg").style.display = "block";
+        }, 350);
+      }
 
-/* ── PETALS on end page ── */
-function spawnPetals(){
-  const pg=document.getElementById('p6');
-  for(let i=0;i<24;i++){
-    setTimeout(()=>{
-      const p=document.createElement('div');
-      p.className='petal';
-      const sz=3+Math.random()*7;
-      p.style.cssText=`
-        left:${Math.random()*100}%;top:${Math.random()*20}%;
+      /* ── PETALS on end page ── */
+      function spawnPetals() {
+        const pg = document.getElementById("p6");
+        for (let i = 0; i < 24; i++) {
+          setTimeout(() => {
+            const p = document.createElement("div");
+            p.className = "petal";
+            const sz = 3 + Math.random() * 7;
+            p.style.cssText = `
+        left:${Math.random() * 100}%;top:${Math.random() * 20}%;
         width:${sz}px;height:${sz}px;
-        background:rgba(${196+Math.round(Math.random()*30)},
-          ${100+Math.round(Math.random()*40)},
-          ${120+Math.round(Math.random()*30)},.5);
-        animation-duration:${2.8+Math.random()*3}s;
-        animation-delay:${Math.random()*1.2}s;
+        background:rgba(${196 + Math.round(Math.random() * 30)},
+          ${100 + Math.round(Math.random() * 40)},
+          ${120 + Math.round(Math.random() * 30)},.5);
+        animation-duration:${2.8 + Math.random() * 3}s;
+        animation-delay:${Math.random() * 1.2}s;
       `;
-      pg.appendChild(p);
-      setTimeout(()=>p.remove(),6000);
-    },i*90);
-  }
-}
-</script>
-</body>
+            pg.appendChild(p);
+            setTimeout(() => p.remove(), 6000);
+          }, i * 90);
+        }
+      }
+    </script>
+  </body>
 </html>
